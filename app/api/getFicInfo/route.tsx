@@ -18,16 +18,22 @@ function getNumberFromText($: any, selector: string): number {
 
 export async function GET(req: NextRequest) {
   try {
-    const url =
-      "https://archiveofourown.org/works/29570736/chapters/72677034".replace(
-        /\/chapters\/\d+$/,
-        ""
-      );
-    const match = url.match(/works\/([^\/]+)/);
+    const { searchParams } = new URL(req.url);
+    const url = searchParams.get("url"); // Extract URL from query parameters
+
+    if (!url) {
+      return new NextResponse(JSON.stringify({ error: "URL is required" }), {
+        status: 400,
+      });
+    }
+
+    const trimmedUrl = url.replace(/\/chapters\/\d+$/, ""); // Trim the URL to remove /chapters
+
+    const match = trimmedUrl.match(/works\/([^\/]+)/);
 
     const ficID = Number(match?.[1] || 0);
 
-    const response = await fetch(url);
+    const response = await fetch(trimmedUrl);
     const htmlString = await response.text();
     const $ = cheerio.load(htmlString);
 
@@ -39,7 +45,7 @@ export async function GET(req: NextRequest) {
     const ficInfo: Partial<FicInfo> = {};
 
     ficInfo.ficID = ficID;
-    ficInfo.ficLink = url;
+    ficInfo.ficLink = trimmedUrl;
     ficInfo.ficBasicInfo = {
       title: $("h2.title").text().trim(),
       author: $('a[rel="author"]').text(),
