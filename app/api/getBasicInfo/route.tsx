@@ -1,4 +1,3 @@
-import { Cheerio } from "cheerio";
 import { NextRequest, NextResponse } from "next/server";
 
 const cheerio = require("cheerio");
@@ -13,7 +12,7 @@ function getTextArray($: any, selector: string) {
 
 export async function GET(req: NextRequest) {
   try {
-    const response = await fetch("https://archiveofourown.org/works/26337703");
+    const response = await fetch("https://archiveofourown.org/works/41369472");
     const htmlString = await response.text();
     const $ = cheerio.load(htmlString);
 
@@ -24,17 +23,17 @@ export async function GET(req: NextRequest) {
       .get()
       .join("\n");
 
-    const fandom = $("dd.fandom").text();
+    const fandoms = getTextArray($, "dd.fandom ul li");
     const relationships = getTextArray($, "dd.relationship ul li");
     const characters = getTextArray($, "dd.character ul li");
 
-    const language = $("dd.language").text();
+    const language = $("dd.language").text().trim();
 
     return new NextResponse(
       JSON.stringify({
         relationships,
         characters,
-        fandom,
+        fandoms,
         title,
         author,
         summary,
