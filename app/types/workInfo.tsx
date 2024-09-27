@@ -1,18 +1,18 @@
-export interface FicInfo {
-  ficID: number;
-  ficLink: string;
-  ficBasicInfo: FicBasicInfo;
-  ficTags: FicTags;
-  ficStats: FicStats;
+export interface WorkInfo {
+  workID: number;
+  workLink: string;
+  workBasicInfo: WorkBasicInfo;
+  workTags: WorkTags;
+  workStats: WorkStats;
 }
 
-export interface FicBasicInfo {
+export interface WorkBasicInfo {
   title: string;
   author: string;
   summary: string;
 }
 
-export type ficRating =
+export type WorkRating =
   | "General Audiences"
   | "Teen And Up Audiences"
   | "Mature"
@@ -29,8 +29,8 @@ export type archiveWarning =
 
 export type category = "F/M" | "F/F" | "M/M" | "Multi" | "Gen" | "Other";
 
-export interface FicTags {
-  rating: ficRating;
+export interface WorkTags {
+  rating: WorkRating;
   archiveWarnings: archiveWarning[];
   categories: category[];
   fandoms: string[];
@@ -40,7 +40,7 @@ export interface FicTags {
   language: string;
 }
 
-export interface FicStats {
+export interface WorkStats {
   publishedDate: Date;
   lastestUpdateDate: Date;
   words: number;
