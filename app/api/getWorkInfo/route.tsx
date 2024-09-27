@@ -19,21 +19,17 @@ function getNumberFromText($: any, selector: string): number {
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const url = searchParams.get("url"); // Extract URL from query parameters
+    const workID = Number(searchParams.get("id"));
 
-    if (!url) {
-      return new NextResponse(JSON.stringify({ error: "URL is required" }), {
+    if (!workID) {
+      return new NextResponse(JSON.stringify({ error: "ID is required" }), {
         status: 400,
       });
     }
 
-    const trimmedUrl = url.replace(/\/chapters\/\d+$/, ""); // Trim the URL to remove /chapters
+    const url = "https://archiveofourown.org/works/" + workID;
 
-    const match = trimmedUrl.match(/works\/([^\/]+)/);
-
-    const workID = Number(match?.[1] || 0);
-
-    const response = await fetch(trimmedUrl);
+    const response = await fetch(url);
     const htmlString = await response.text();
     const $ = cheerio.load(htmlString);
 
@@ -45,7 +41,7 @@ export async function GET(req: NextRequest) {
     const workInfo: Partial<WorkInfo> = {};
 
     workInfo.workID = workID;
-    workInfo.workLink = trimmedUrl;
+    workInfo.workLink = url;
     workInfo.workBasicInfo = {
       title: $("h2.title").text().trim(),
       author: $('a[rel="author"]').text(),

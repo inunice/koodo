@@ -5,10 +5,13 @@ import { useState } from "react";
 export default function Home() {
   const [link, setLink] = useState("");
 
-  const handleSubmit = async () => {
+  const getWorkInformation = async () => {
     try {
+      const url = new URL(link);
+      const id = url.pathname.split("/")[2];
+
       const response = await fetch(
-        `/api/getWorkInfo?url=${encodeURIComponent(link)}`,
+        `/api/getWorkInfo?id=${encodeURIComponent(id)}`,
         {
           method: "GET",
         }
@@ -30,7 +33,7 @@ export default function Home() {
           onChange={(e) => setLink(e.target.value)}
           placeholder="Enter link"
         />
-        <button onClick={handleSubmit}>Submit</button>
+        <button onClick={getWorkInformation}>Get work info</button>
       </div>
     </div>
   );
