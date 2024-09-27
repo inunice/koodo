@@ -7,6 +7,12 @@ export default function Home() {
 
   const getWorkInformation = async () => {
     try {
+      if (!link.startsWith("https://archiveofourown.org/works/")) {
+        throw new Error(
+          "Invalid link. Please copy the full link from the work page starting at the first chapter."
+        );
+      }
+
       const url = new URL(link);
       const id = url.pathname.split("/")[2];
 
