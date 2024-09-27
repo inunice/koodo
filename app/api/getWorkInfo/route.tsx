@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { FicInfo } from "../../types/ficInfo";
+import { WorkInfo } from "../../types/workInfo";
 
 const cheerio = require("cheerio");
 
@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
 
     const match = trimmedUrl.match(/works\/([^\/]+)/);
 
-    const ficID = Number(match?.[1] || 0);
+    const workID = Number(match?.[1] || 0);
 
     const response = await fetch(trimmedUrl);
     const htmlString = await response.text();
@@ -42,16 +42,16 @@ export async function GET(req: NextRequest) {
       .get()
       .join("\n");
 
-    const ficInfo: Partial<FicInfo> = {};
+    const workInfo: Partial<WorkInfo> = {};
 
-    ficInfo.ficID = ficID;
-    ficInfo.ficLink = trimmedUrl;
-    ficInfo.ficBasicInfo = {
+    workInfo.workID = workID;
+    workInfo.workLink = trimmedUrl;
+    workInfo.workBasicInfo = {
       title: $("h2.title").text().trim(),
       author: $('a[rel="author"]').text(),
       summary,
     };
-    ficInfo.ficTags = {
+    workInfo.workTags = {
       rating: $("dd.rating").text().trim(),
       archiveWarnings: getTextArray($, "dd.warning ul li"),
       categories: getTextArray($, "dd.category ul li"),
@@ -70,7 +70,7 @@ export async function GET(req: NextRequest) {
     const totalChapters =
       chapterProgress[1] === "?" ? "?" : Number(chapterProgress[1]);
 
-    ficInfo.ficStats = {
+    workInfo.workStats = {
       publishedDate,
       lastestUpdateDate: lastestUpdateDate
         ? new Date(lastestUpdateDate)
@@ -85,12 +85,12 @@ export async function GET(req: NextRequest) {
       status: totalChapters === "?" ? "In Progress" : "Complete",
     };
 
-    return new NextResponse(JSON.stringify(ficInfo), {
+    return new NextResponse(JSON.stringify(workInfo), {
       status: 200,
     });
   } catch (error) {
     return new NextResponse(
-      JSON.stringify({ error: "Failed to fetch fic data" }),
+      JSON.stringify({ error: "Failed to fetch work data" }),
       {
         status: 500,
       }

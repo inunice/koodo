@@ -8,7 +8,7 @@ export default function Home() {
   const handleSubmit = async () => {
     try {
       const response = await fetch(
-        `/api/getFicInfo?url=${encodeURIComponent(link)}`,
+        `/api/getWorkInfo?url=${encodeURIComponent(link)}`,
         {
           method: "GET",
         }
