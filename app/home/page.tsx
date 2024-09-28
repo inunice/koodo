@@ -1,11 +1,16 @@
 "use client";
 
 import { useState } from "react";
+
+import { WorkInfo } from "@/types/workInfo";
+
+import WorkCard from "./workCard";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function Home() {
   const [link, setLink] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [work, setWork] = useState<WorkInfo | null>(null);
 
   const getWorkInformation = async () => {
     try {
@@ -24,8 +29,8 @@ export default function Home() {
           method: "GET",
         }
       );
-      const data = await response.json();
-      console.log(data);
+      const work = await response.json();
+      setWork(work);
       setErrorMessage(null);
     } catch (error: any) {
       console.error("Error fetching data:", error);
@@ -51,6 +56,7 @@ export default function Home() {
           <AlertDescription>{errorMessage}</AlertDescription>
         </Alert>
       )}
+      {work && <WorkCard work={work} />}
     </div>
   );
 }
