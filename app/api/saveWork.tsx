@@ -1,7 +1,7 @@
 import supabase from "@/config/supabaseClient";
 import { WorkInfo } from "@/types/workInfo";
 
-export const saveWork = async (work: WorkInfo) => {
+export const saveWork = async (work: WorkInfo): Promise<string> => {
   const workData = {
     workID: work.workID,
     workLink: work.workLink,
@@ -28,11 +28,13 @@ export const saveWork = async (work: WorkInfo) => {
     status: work.workStats.status,
   };
 
-  const { data, error } = await supabase.from("works").insert([workData]);
+  const { error } = await supabase.from("works").insert([workData]);
 
   if (error) {
     console.error("Error adding work to database:", error);
+    return error.message;
   } else {
-    console.log("Work added to database:", data);
+    console.log("Work added to database");
+    return "Success";
   }
 };

@@ -11,14 +11,25 @@ import WorkForm from "./workForm";
 
 export default function Home() {
   const [work, setWork] = useState<WorkInfo | null>(null);
+  const [saveStatus, setSaveStatus] = useState<string | null>(null);
 
   const getWorkInformation = (work: WorkInfo) => {
     setWork(work);
   };
 
-  const handleSaveWork = () => {
+  const handleSaveWork = async () => {
     if (work) {
-      saveWork(work);
+      const statusMessage = await saveWork(work);
+      if (statusMessage === "Success") {
+        setSaveStatus("Work added successfully!");
+      } else if (
+        statusMessage ===
+        'duplicate key value violates unique constraint "works_pkey"'
+      ) {
+        setSaveStatus("Work already exists in database");
+      } else {
+        setSaveStatus("Error adding work to database");
+      }
     }
   };
 
@@ -28,6 +39,7 @@ export default function Home() {
       <WorkForm setWorkInfo={getWorkInformation} />
       {work && <WorkCard work={work} />}
       <button onClick={handleSaveWork}>Add work</button>
+      {saveStatus}
     </div>
   );
 }
