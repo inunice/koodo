@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import { saveWork } from "@/app/api/saveWork";
 
@@ -32,6 +33,14 @@ export default function Home() {
       }
     }
   };
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (saveStatus === "Work added successfully!") {
+      router.push("/home");
+    }
+  }, [saveStatus, router]);
 
   return (
     <div>
