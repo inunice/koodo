@@ -13,7 +13,7 @@ export default function Home() {
   const [work, setWork] = useState<WorkInfo | null>(null);
   const [saveStatus, setSaveStatus] = useState<string | null>(null);
 
-  const getWorkInformation = (work: WorkInfo) => {
+  const getWorkInformation = (work: WorkInfo | null) => {
     setWork(work);
   };
 
@@ -36,9 +36,13 @@ export default function Home() {
   return (
     <div>
       <h1>Enter Fic URL</h1>
+
       <WorkForm setWorkInfo={getWorkInformation} />
+
       {work && <WorkCard work={work} />}
-      <button onClick={handleSaveWork}>Add work</button>
+
+      {work && <button onClick={handleSaveWork}>Add work</button>}
+
       {saveStatus}
     </div>
   );

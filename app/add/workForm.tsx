@@ -9,7 +9,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 export default function WorkForm({
   setWorkInfo,
 }: {
-  setWorkInfo: (work: WorkInfo) => void;
+  setWorkInfo: (work: WorkInfo | null) => void;
 }) {
   const [link, setLink] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -37,6 +37,7 @@ export default function WorkForm({
     } catch (error: any) {
       console.error("Error fetching data:", error);
       setErrorMessage(error.message);
+      setWorkInfo(null);
     }
   };
   return (
