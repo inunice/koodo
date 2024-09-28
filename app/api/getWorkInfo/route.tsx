@@ -64,7 +64,7 @@ export async function GET(req: NextRequest) {
       .text()
       .split("/");
     const totalChapters =
-      chapterProgress[1] === "?" ? "?" : Number(chapterProgress[1]);
+      chapterProgress[1] === "?" ? 0 : Number(chapterProgress[1]);
 
     workInfo.workStats = {
       publishedDate,
@@ -78,7 +78,7 @@ export async function GET(req: NextRequest) {
       kudos: getNumberFromText($, "dd.kudos"),
       bookmarks: getNumberFromText($, "dd.bookmarks"),
       hits: getNumberFromText($, "dd.hits"),
-      status: totalChapters === "?" ? "In Progress" : "Complete",
+      status: totalChapters === 0 ? "In Progress" : "Complete",
     };
 
     return new NextResponse(JSON.stringify(workInfo), {

@@ -45,7 +45,7 @@ export interface WorkStats {
   lastestUpdateDate: Date;
   words: number;
   latestChapter: number;
-  totalChapters: number | "?";
+  totalChapters: number;
   comments: number;
   kudos: number;
   bookmarks: number;
