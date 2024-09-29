@@ -46,9 +46,11 @@ export default function Home() {
           <Link href="/add">Add work</Link>
         </Button>
       </div>
-      {bookmarks.map((bookmark, index) => (
-        <BookmarkCard key={index} bookmark={bookmark} />
-      ))}
+      <div className="grid grid-cols-3 gap-3">
+        {bookmarks.map((bookmark, index) => (
+          <BookmarkCard key={index} bookmark={bookmark} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -11,15 +11,21 @@ interface BookmarkCardProps {
 
 export default function WorkCard({ bookmark }: BookmarkCardProps) {
   return (
-    <Card>
-      <h1>{bookmark.workDetails?.workBasicInfo.title}</h1>
-      <h3>{bookmark.workDetails?.workBasicInfo.author}</h3>
-      <h3>{bookmark.workDetails?.workTags.fandoms}</h3>
+    <Card className="flex flex-col p-3">
+      <p className="text-md">{bookmark.workDetails?.workBasicInfo.title}</p>
+      <p className="text-sm text-gray-700">
+        {bookmark.workDetails?.workBasicInfo.author}
+      </p>
+      <p className="text-sm text-gray-700">
+        {bookmark.workDetails?.workTags.fandoms}
+      </p>
 
       <p>{bookmark.userBookmarkDetails.status}</p>
-      {bookmark.workDetails && (
-        <Link href={bookmark.workDetails.workLink}>Link</Link>
-      )}
+      <div className="flex justify-end">
+        {bookmark.workDetails && (
+          <Link href={bookmark.workDetails.workLink}>x</Link>
+        )}
+      </div>
     </Card>
   );
 }
