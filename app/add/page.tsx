@@ -11,7 +11,7 @@ import { UserBookmark } from "@/types/userWorkInfo";
 
 import { Button } from "@/components/ui/button";
 import WorkCard from "./workCard";
-import WorkForm from "./workForm";
+import WorkPreview from "./workPreview";
 
 export default function Home() {
   const [work, setWork] = useState<WorkInfo | null>(null);
@@ -70,7 +70,7 @@ export default function Home() {
     <div>
       <h1>Enter Fic URL</h1>
 
-      <WorkForm setWorkInfo={getWorkInformation} />
+      <WorkPreview setWorkInfo={getWorkInformation} />
 
       {work && <WorkCard work={work} />}
 

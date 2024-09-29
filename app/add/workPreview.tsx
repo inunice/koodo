@@ -7,7 +7,7 @@ import { WorkInfo } from "@/types/workInfo";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-export default function WorkForm({
+export default function WorkPreview({
   setWorkInfo,
 }: {
   setWorkInfo: (work: WorkInfo | null) => void;
