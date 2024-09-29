@@ -12,13 +12,20 @@ import { UserBookmark } from "@/types/userWorkInfo";
 import { Button } from "@/components/ui/button";
 import WorkCard from "./workCard";
 import WorkPreview from "./workPreview";
+import WorkForm from "./workForm";
 
 export default function Home() {
   const [work, setWork] = useState<WorkInfo | null>(null);
   const [saveStatus, setSaveStatus] = useState<string | null>(null);
+  const [latestChapter, setLatestChapter] = useState<number>(0);
 
   const getWorkInformation = (work: WorkInfo | null) => {
-    setWork(work);
+    if (work) {
+      setWork(work);
+      setLatestChapter(
+        Math.max(work.workStats.latestChapter, work.workStats.totalChapters)
+      );
+    }
   };
 
   const handleSaveWork = async () => {
@@ -69,13 +76,11 @@ export default function Home() {
   return (
     <div>
       <h1>Enter Fic URL</h1>
-
       <WorkPreview setWorkInfo={getWorkInformation} />
-
       {work && <WorkCard work={work} />}
-
+      <WorkForm latestChapter={latestChapter} />
+      {/* {work && <WorkForm />} */}
       {work && <Button onClick={handleSaveWork}>Add work</Button>}
-
       {saveStatus}
     </div>
   );
