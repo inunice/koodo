@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
+import { getBookmarkWorkIDs } from "@/app/api/getBookmarkWorkIDs";
 import { fetchWorks } from "@/app/api/fetchWorks";
 
 import { WorkInfo } from "@/types/workInfo";
@@ -14,7 +15,8 @@ export default function Home() {
 
   useEffect(() => {
     const getWorks = async () => {
-      const fetchedWorks = await fetchWorks();
+      const bookmarkWorkIDs = await getBookmarkWorkIDs();
+      const fetchedWorks = await fetchWorks(bookmarkWorkIDs);
       if (fetchedWorks) {
         setWorks(fetchedWorks);
       }

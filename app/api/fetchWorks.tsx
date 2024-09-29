@@ -1,8 +1,13 @@
 import supabase from "@/config/supabaseClient";
 import { WorkInfo } from "@/types/workInfo";
 
-export const fetchWorks = async (): Promise<WorkInfo[] | null> => {
-  const { data, error } = await supabase.from("works").select("*");
+export const fetchWorks = async (
+  workIDs: number[]
+): Promise<WorkInfo[] | null> => {
+  const { data, error } = await supabase
+    .from("works")
+    .select("*")
+    .in("workID", workIDs);
   if (error) {
     console.error("Error fetching works:", error);
     return null;
