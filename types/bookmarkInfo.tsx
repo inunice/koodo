@@ -1,4 +1,5 @@
 import { WorkInfo } from "./workInfo";
+
 export interface UserBookmark {
   userID: number;
   workID: number;
@@ -13,6 +14,6 @@ export interface UserBookmark {
 }
 
 export interface Bookmark {
-  bookmarkDetails: UserBookmark;
+  userBookmarkDetails: UserBookmark;
   workDetails: WorkInfo | undefined;
 }

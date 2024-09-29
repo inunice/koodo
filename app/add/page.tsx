@@ -7,7 +7,7 @@ import { saveWork } from "@/app/api/saveWork";
 import { addUserBookmark } from "@/app/api/addUserBookmark";
 
 import { WorkInfo } from "@/types/workInfo";
-import { UserBookmark } from "@/types/userWorkInfo";
+import { UserBookmark } from "@/types/bookmarkInfo";
 
 import { Button } from "@/components/ui/button";
 import WorkCard from "./workCard";

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { fetchBookmarkData } from "@/app/api/fetchBookmarkData";
 import { fetchWorks } from "@/app/api/fetchWorks";
 
-import { Bookmark } from "@/types/userWorkInfo";
+import { Bookmark } from "@/types/bookmarkInfo";
 
 import BookmarkCard from "./bookmarkCard";
 import { Button } from "@/components/ui/button";
@@ -16,20 +16,22 @@ export default function Home() {
 
   useEffect(() => {
     const getWorks = async () => {
-      const bookmarkData = await fetchBookmarkData();
-      const bookmarkWorkIDs = bookmarkData.map((bookmark) => bookmark.workID);
+      const userBookmarkData = await fetchBookmarkData();
+      const userBookmarkWorkIDs = userBookmarkData.map(
+        (bookmark) => bookmark.workID
+      );
 
-      const fetchedWorks = await fetchWorks(bookmarkWorkIDs);
+      const fetchedWorks = await fetchWorks(userBookmarkWorkIDs);
       if (fetchedWorks) {
         const workMap = new Map(
           fetchedWorks.map((work) => [work.workID, work])
         );
-        const mergedData = bookmarkData.map((bookmark) => ({
-          bookmarkDetails: bookmark,
-          workDetails: workMap.get(bookmark.workID),
+        const bookmarks: Bookmark[] = userBookmarkData.map((userBookmark) => ({
+          userBookmarkDetails: userBookmark,
+          workDetails: workMap.get(userBookmark.workID),
         }));
 
-        setBookmarks(mergedData);
+        setBookmarks(bookmarks);
       }
     };
 
