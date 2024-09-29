@@ -43,7 +43,12 @@ const formSchema = z.object({
     .optional(),
 });
 
-export default function WorkForm({ latestChapter }: { latestChapter: number }) {
+interface WorkFormProps {
+  latestChapter: number;
+  onSubmit: (values: z.infer<typeof formSchema>) => void;
+}
+
+export default function WorkForm({ latestChapter, onSubmit }: WorkFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -57,10 +62,6 @@ export default function WorkForm({ latestChapter }: { latestChapter: number }) {
       comment: "",
     },
   });
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
 
   return (
     <div>
@@ -194,9 +195,9 @@ export default function WorkForm({ latestChapter }: { latestChapter: number }) {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button>Add work</Button>
         </form>
-      </Form>{" "}
+      </Form>
     </div>
   );
 }

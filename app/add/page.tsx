@@ -28,31 +28,25 @@ export default function Home() {
     }
   };
 
-  const handleSaveWork = async () => {
+  const handleSaveWork = async (bookmarkInformation: any) => {
     if (work) {
       const statusMessage = await saveWork(work);
       if (statusMessage === "Success") {
         setSaveStatus("Work added successfully!");
 
-        // TODO: Form to add custom fields
         const newBookmark: UserBookmark = {
           userID: 1,
           workID: work.workID,
-          status: "To Read",
-          currentChapter: 1,
-          ships: ["Ship1"],
-          customTags: [
-            "Fantasy",
-            "High Priority",
-            "2023",
-            "Recommended by Friend",
-          ],
-          isDownloaded: false,
-          favorite: true,
-          rating: 5,
-          comment: "Looking forward to reading this!",
+          status: bookmarkInformation.status,
+          currentChapter: bookmarkInformation.currentChapter,
+          ships: bookmarkInformation.ships,
+          customTags: bookmarkInformation.customTags,
+          isDownloaded: bookmarkInformation.isDownloaded,
+          favorite: bookmarkInformation.favorite,
+          rating: bookmarkInformation.rating,
+          comment: bookmarkInformation.comment,
         };
-
+        console.log(newBookmark);
         await addUserBookmark(newBookmark);
       } else if (
         statusMessage ===
@@ -78,9 +72,9 @@ export default function Home() {
       <h1>Enter Fic URL</h1>
       <WorkPreview setWorkInfo={getWorkInformation} />
       {work && <WorkCard work={work} />}
-      <WorkForm latestChapter={latestChapter} />
-      {/* {work && <WorkForm />} */}
-      {work && <Button onClick={handleSaveWork}>Add work</Button>}
+      {work && (
+        <WorkForm latestChapter={latestChapter} onSubmit={handleSaveWork} />
+      )}
       {saveStatus}
     </div>
   );
