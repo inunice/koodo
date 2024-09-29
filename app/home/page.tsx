@@ -6,15 +6,13 @@ import Link from "next/link";
 import { fetchBookmarkData } from "@/app/api/fetchBookmarkData";
 import { fetchWorks } from "@/app/api/fetchWorks";
 
-import { WorkInfo } from "@/types/workInfo";
-import { UserBookmark } from "@/types/userWorkInfo";
+import { Bookmark } from "@/types/userWorkInfo";
 
+import BookmarkCard from "./bookmarkCard";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
-  const [bookmarks, setBookmarks] = useState<
-    (UserBookmark & { work?: WorkInfo })[]
-  >([]);
+  const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
 
   useEffect(() => {
     const getWorks = async () => {
@@ -27,8 +25,8 @@ export default function Home() {
           fetchedWorks.map((work) => [work.workID, work])
         );
         const mergedData = bookmarkData.map((bookmark) => ({
-          ...bookmark,
-          work: workMap.get(bookmark.workID),
+          bookmarkDetails: bookmark,
+          workDetails: workMap.get(bookmark.workID),
         }));
 
         setBookmarks(mergedData);
@@ -47,20 +45,7 @@ export default function Home() {
         </Button>
       </div>
       {bookmarks.map((bookmark, index) => (
-        <div key={index}>
-          <h2>Bookmark Info</h2>
-          {bookmark.workID}
-          {bookmark.status}
-          <h2>Work Info</h2>
-          {bookmark.work ? (
-            <>
-              <h2>{bookmark.work.workID}</h2>
-              <h2>{bookmark.work.workBasicInfo.title}</h2>
-            </>
-          ) : (
-            <p>Work information not available</p>
-          )}
-        </div>
+        <BookmarkCard key={index} bookmark={bookmark} />
       ))}
     </div>
   );

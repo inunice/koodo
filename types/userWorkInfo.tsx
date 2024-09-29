@@ -1,3 +1,4 @@
+import { WorkInfo } from "./workInfo";
 export interface UserBookmark {
   userID: number;
   workID: number;
@@ -9,4 +10,9 @@ export interface UserBookmark {
   favorite: boolean;
   rating: number;
   comment: string;
+}
+
+export interface Bookmark {
+  bookmarkDetails: UserBookmark;
+  workDetails: WorkInfo | undefined;
 }
