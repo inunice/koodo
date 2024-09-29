@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { WorkInfo } from "@/types/workInfo";
 
+import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function WorkForm({
@@ -49,7 +50,7 @@ export default function WorkForm({
           onChange={(e) => setLink(e.target.value)}
           placeholder="Enter link"
         />
-        <button onClick={getWorkInformation}>Get work info</button>
+        <Button onClick={getWorkInformation}>Get work info</Button>
       </div>
       {errorMessage && (
         <Alert variant="destructive">

@@ -7,6 +7,8 @@ import { fetchWorks } from "@/app/api/fetchWorks";
 
 import { WorkInfo } from "@/types/workInfo";
 
+import { Button } from "@/components/ui/button";
+
 export default function Home() {
   const [works, setWorks] = useState<WorkInfo[]>([]);
 
@@ -25,7 +27,9 @@ export default function Home() {
     <div>
       <span>Home</span>
       <div>
-        <Link href="/add">Add work</Link>
+        <Button asChild>
+          <Link href="/add">Add work</Link>
+        </Button>
       </div>
       {works.map((work, index) => (
         <div key={index}>

@@ -7,6 +7,7 @@ import { saveWork } from "@/app/api/saveWork";
 
 import { WorkInfo } from "@/types/workInfo";
 
+import { Button } from "@/components/ui/button";
 import WorkCard from "./workCard";
 import WorkForm from "./workForm";
 
@@ -50,7 +51,7 @@ export default function Home() {
 
       {work && <WorkCard work={work} />}
 
-      {work && <button onClick={handleSaveWork}>Add work</button>}
+      {work && <Button onClick={handleSaveWork}>Add work</Button>}
 
       {saveStatus}
     </div>
