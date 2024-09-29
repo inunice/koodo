@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import { saveWork } from "@/app/api/saveWork";
+import { addUserBookmark } from "@/app/api/addUserBookmark";
 
 import { WorkInfo } from "@/types/workInfo";
+import { UserBookmark } from "@/types/userWorkInfo";
 
 import { Button } from "@/components/ui/button";
 import WorkCard from "./workCard";
@@ -24,6 +26,27 @@ export default function Home() {
       const statusMessage = await saveWork(work);
       if (statusMessage === "Success") {
         setSaveStatus("Work added successfully!");
+
+        // TODO: Form to add custom fields
+        const newBookmark: UserBookmark = {
+          userID: 1,
+          workID: work.workID,
+          status: "To Read",
+          currentChapter: 1,
+          ships: ["Ship1"],
+          customTags: [
+            "Fantasy",
+            "High Priority",
+            "2023",
+            "Recommended by Friend",
+          ],
+          isDownloaded: false,
+          favorite: true,
+          rating: 5,
+          comment: "Looking forward to reading this!",
+        };
+
+        await addUserBookmark(newBookmark);
       } else if (
         statusMessage ===
         'duplicate key value violates unique constraint "works_pkey"'
