@@ -28,12 +28,12 @@ export default function WorkCard({ bookmark }: BookmarkCardProps) {
           </p>
           <div className="flex flex-wrap gap-1">
             {bookmark.workDetails?.workTags.fandoms.map((fandom, index) => (
+              // TODO - Add style to badge
               <Badge key={index} variant="outline" className="text-[10px]">
                 {fandom}
               </Badge>
             ))}
           </div>
-
           <p>{bookmark.userBookmarkDetails.status}</p>
           <div className="flex">
             {bookmark.workDetails && (
@@ -47,6 +47,8 @@ export default function WorkCard({ bookmark }: BookmarkCardProps) {
         <DialogDescription>
           <p>{bookmark.workDetails?.workBasicInfo.author}</p>
           <p>{bookmark.workDetails?.workBasicInfo.summary}</p>
+          <p>{bookmark.userBookmarkDetails.status}</p>
+          <p>{bookmark.userBookmarkDetails.rating}</p>
         </DialogDescription>
       </DialogContent>
     </Dialog>
