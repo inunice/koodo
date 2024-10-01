@@ -35,9 +35,15 @@ export default function WorkPreview({
       const work = await response.json();
       setWorkInfo(work);
       setErrorMessage(null);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error fetching data:", error);
-      setErrorMessage(error.message);
+
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage("An unknown error occurred");
+      }
+
       setWorkInfo(null);
     }
   };

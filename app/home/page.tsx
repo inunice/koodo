@@ -7,7 +7,6 @@ import { fetchBookmarkData } from "@/app/api/fetchBookmarkData";
 import { fetchWorks } from "@/app/api/fetchWorks";
 
 import { Bookmark } from "@/types/bookmarkInfo";
-import { WorkDetails } from "@/types/workInfo";
 
 import BookmarkCard from "./bookmarkCard";
 import { Button } from "@/components/ui/button";
