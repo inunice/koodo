@@ -1,9 +1,9 @@
-import { WorkInfo } from "./workInfo";
+import { WorkInfo, WorkBasicInfo } from "./workInfo";
 
-export interface UserBookmark {
-  userID: number;
-  workID: number;
-  status: "To Read" | "Reading" | "Dropped" | "Completed";
+export type readingStatus = "To Read" | "Reading" | "Dropped" | "Completed";
+
+export interface BookmarkForm {
+  readingStatus: readingStatus;
   currentChapter: number;
   ships: string[];
   customTags: string[];
@@ -12,8 +12,12 @@ export interface UserBookmark {
   rating: number;
   comment: string;
 }
+export interface UserBookmark extends BookmarkForm {
+  userID: number;
+  workID: number;
+  workBasicInfo: WorkBasicInfo;
+}
 
-export interface Bookmark {
-  userBookmarkDetails: UserBookmark;
-  workDetails: WorkInfo | undefined;
+export interface Bookmark extends UserBookmark {
+  workDetails: Omit<WorkInfo, "workBasicInfo"> | undefined;
 }

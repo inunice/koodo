@@ -1,9 +1,12 @@
-export interface WorkInfo {
+export interface WorkDetails {
   workID: number;
   workLink: string;
-  workBasicInfo: WorkBasicInfo;
   workTags: WorkTags;
   workStats: WorkStats;
+}
+
+export interface WorkInfo extends WorkDetails {
+  workBasicInfo: WorkBasicInfo;
 }
 
 export interface WorkBasicInfo {
@@ -12,7 +15,7 @@ export interface WorkBasicInfo {
   summary: string;
 }
 
-export type WorkRating =
+export type workRating =
   | "General Audiences"
   | "Teen And Up Audiences"
   | "Mature"
@@ -30,7 +33,7 @@ export type archiveWarning =
 export type category = "F/M" | "F/F" | "M/M" | "Multi" | "Gen" | "Other";
 
 export interface WorkTags {
-  rating: WorkRating;
+  rating: workRating;
   archiveWarnings: archiveWarning[];
   categories: category[];
   fandoms: string[];

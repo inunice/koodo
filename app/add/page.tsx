@@ -7,9 +7,8 @@ import { saveWork } from "@/app/api/saveWork";
 import { addUserBookmark } from "@/app/api/addUserBookmark";
 
 import { WorkInfo } from "@/types/workInfo";
-import { UserBookmark } from "@/types/bookmarkInfo";
+import { UserBookmark, BookmarkForm } from "@/types/bookmarkInfo";
 
-import { Button } from "@/components/ui/button";
 import WorkCard from "./workCard";
 import WorkPreview from "./workPreview";
 import WorkForm from "./workForm";
@@ -28,7 +27,7 @@ export default function Home() {
     }
   };
 
-  const handleSaveWork = async (bookmarkInformation: any) => {
+  const handleSaveWork = async (bookmarkInformation: BookmarkForm) => {
     if (work) {
       const statusMessage = await saveWork(work);
       if (statusMessage === "Success") {
@@ -37,7 +36,8 @@ export default function Home() {
         const newBookmark: UserBookmark = {
           userID: 1,
           workID: work.workID,
-          status: bookmarkInformation.status,
+          workBasicInfo: work.workBasicInfo,
+          readingStatus: bookmarkInformation.readingStatus,
           currentChapter: bookmarkInformation.currentChapter,
           ships: bookmarkInformation.ships,
           customTags: bookmarkInformation.customTags,

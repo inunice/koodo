@@ -22,9 +22,9 @@ export default function WorkCard({ bookmark }: BookmarkCardProps) {
     <Dialog>
       <DialogTrigger>
         <Card className="flex flex-col items-start p-3">
-          <p className="text-md">{bookmark.workDetails?.workBasicInfo.title}</p>
+          <p className="text-md">{bookmark.workBasicInfo.title}</p>
           <p className="text-sm text-gray-700">
-            {bookmark.workDetails?.workBasicInfo.author}
+            {bookmark.workBasicInfo.author}
           </p>
           <div className="flex flex-wrap gap-1">
             {bookmark.workDetails?.workTags.fandoms.map((fandom, index) => (
@@ -34,7 +34,7 @@ export default function WorkCard({ bookmark }: BookmarkCardProps) {
               </Badge>
             ))}
           </div>
-          <p>{bookmark.userBookmarkDetails.status}</p>
+          <p>{bookmark.readingStatus}</p>
           <div className="flex">
             {bookmark.workDetails && (
               <Link href={bookmark.workDetails.workLink}>x</Link>
@@ -43,12 +43,12 @@ export default function WorkCard({ bookmark }: BookmarkCardProps) {
         </Card>
       </DialogTrigger>
       <DialogContent>
-        <DialogTitle>{bookmark.workDetails?.workBasicInfo.title}</DialogTitle>
+        <DialogTitle>{bookmark.workBasicInfo.title}</DialogTitle>
         <DialogDescription>
-          <p>{bookmark.workDetails?.workBasicInfo.author}</p>
-          <p>{bookmark.workDetails?.workBasicInfo.summary}</p>
-          <p>{bookmark.userBookmarkDetails.status}</p>
-          <p>{bookmark.userBookmarkDetails.rating}</p>
+          <p>{bookmark.workBasicInfo.author}</p>
+          <p>{bookmark.workBasicInfo.summary}</p>
+          <p>{bookmark.readingStatus}</p>
+          <p>{bookmark.comment}</p>
         </DialogDescription>
       </DialogContent>
     </Dialog>

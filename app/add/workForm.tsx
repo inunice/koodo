@@ -4,6 +4,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
+import { BookmarkForm } from "@/types/bookmarkInfo";
+
 import {
   Form,
   FormField,
@@ -24,7 +26,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
-  status: z.enum(["To Read", "Reading", "Dropped", "Completed"]),
+  readingStatus: z.enum(["To Read", "Reading", "Dropped", "Completed"]),
   currentChapter: z.coerce
     .number()
     .min(0, { message: "Please input a valid chapter number." }),
@@ -39,20 +41,20 @@ const formSchema = z.object({
     .multipleOf(0.5, { message: "Ratings must be in half point increments." }),
   comment: z
     .string()
-    .max(140, { message: "Comment must be 140 characters or less." })
+    .max(200, { message: "Comment must be 200 characters or less." })
     .optional(),
 });
 
 interface WorkFormProps {
   latestChapter: number;
-  onSubmit: (values: z.infer<typeof formSchema>) => void;
+  onSubmit: (values: BookmarkForm) => void;
 }
 
 export default function WorkForm({ latestChapter, onSubmit }: WorkFormProps) {
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<BookmarkForm>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      status: "To Read",
+      readingStatus: "To Read",
       currentChapter: 0,
       ships: [],
       customTags: [],
@@ -69,10 +71,10 @@ export default function WorkForm({ latestChapter, onSubmit }: WorkFormProps) {
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
-            name="status"
+            name="readingStatus"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Status</FormLabel>
+                <FormLabel>readingStatus</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}

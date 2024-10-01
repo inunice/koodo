@@ -1,18 +1,22 @@
 import supabase from "@/config/supabaseClient";
-import { WorkInfo } from "@/types/workInfo";
+import { WorkInfo, WorkDetails } from "@/types/workInfo";
 
 export const fetchWorks = async (
-  workIDs: number[]
-): Promise<WorkInfo[] | null> => {
+  workIDs: number[],
+  includeBasicInfo: boolean = true
+): Promise<WorkInfo[] | WorkDetails[] | null> => {
   const { data, error } = await supabase
     .from("works")
     .select("*")
     .in("workID", workIDs);
+
   if (error) {
     console.error("Error fetching works:", error);
     return null;
-  } else {
-    const works: WorkInfo[] = data.map((work) => ({
+  }
+
+  return data.map((work) => {
+    const workInfo: WorkInfo = {
       workID: work.workID,
       workLink: work.workLink,
       workBasicInfo: {
@@ -42,8 +46,14 @@ export const fetchWorks = async (
         hits: work.hits,
         status: work.status,
       },
-    }));
+    };
 
-    return works;
-  }
+    if (!includeBasicInfo) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { workBasicInfo, ...rest } = workInfo;
+      return rest;
+    }
+
+    return workInfo;
+  });
 };
