@@ -1,9 +1,15 @@
 import { WorkInfo, WorkBasicInfo } from "./workInfo";
 
-export type readingStatus = "To Read" | "Reading" | "Dropped" | "Completed";
+export const readingStatus = [
+  "To Read",
+  "Reading",
+  "Dropped",
+  "Completed",
+] as const;
+export type ReadingStatus = (typeof readingStatus)[number];
 
 export interface BookmarkForm {
-  readingStatus: readingStatus;
+  readingStatus: ReadingStatus;
   currentChapter: number;
   ships: string[];
   customTags: string[];
