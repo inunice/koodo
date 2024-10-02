@@ -20,16 +20,18 @@ interface DisplayCardProps {
 
 export default function DisplayCard({ bookmark }: DisplayCardProps) {
   return (
-    <Card className="w-full flex flex-col items-start px-5 py-4 gap-1 align-left">
+    <Card className="w-full flex flex-col items-start px-5 py-4 gap-2 align-left">
       <CardHeader className="p-0">
-        <div className="flex flex-wrap gap-0 items-baseline">
-          <span className="text-lg pr-2">{bookmark.workBasicInfo.title}</span>
-          <span className="text-sm text-gray-700">
+        <div className="items-baseline">
+          <span className="text-lg pr-2 leading-3">
+            {bookmark.workBasicInfo.title}
+          </span>
+          <span className="text-sm text-gray-700 leading-3">
             {bookmark.workBasicInfo.author.join(" ")}
           </span>
         </div>
       </CardHeader>
-      <CardContent className="w-full p-0">
+      <CardContent className="flex flex-col gap-1 w-full p-0">
         <DisplayBadges
           mainTags={bookmark.mainTags}
           fandoms={bookmark.workDetails?.workTags.fandoms}
@@ -38,7 +40,7 @@ export default function DisplayCard({ bookmark }: DisplayCardProps) {
           {bookmark.workBasicInfo.summary.join(" ")}
         </p>
       </CardContent>
-      <CardFooter className="w-full flex flex-row p-0 gap-10 justify-between">
+      <CardFooter className="w-full flex flex-row p-0 pt-2 gap-10 justify-between">
         <SelectReadingStatus bookmark={bookmark} />
         <div className="flex flex-row gap-1">
           <UpdateBookmark fetchDate={bookmark.workDetails?.fetchDate} />
