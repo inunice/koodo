@@ -30,13 +30,15 @@ export const saveWork = async (work: WorkInfo): Promise<string> => {
     work_type: work.workStats.workType,
   };
 
-  const { error } = await supabase.from("works").insert([workData]);
+  const { error } = await supabase.from("works").upsert([workData], {
+    onConflict: "work_ID",
+  });
 
   if (error) {
-    console.error("Error adding work to database:", error);
+    console.error("Error adding/updating work in database:", error);
     return error.message;
   } else {
-    console.log("Work added to database");
+    console.log("Work added/updated in database");
     return "Success";
   }
 };
