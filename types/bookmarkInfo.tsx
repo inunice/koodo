@@ -11,8 +11,8 @@ export type ReadingStatus = (typeof readingStatus)[number];
 export interface BookmarkForm {
   readingStatus: ReadingStatus;
   currentChapter: number;
-  ships: string[];
-  customTags: string[];
+  mainTags: string[];
+  otherTags: string[];
   isDownloaded: boolean;
   favorite: boolean;
   rating: number;

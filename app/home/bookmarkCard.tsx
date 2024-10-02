@@ -34,6 +34,14 @@ export default function WorkCard({ bookmark }: BookmarkCardProps) {
               </Badge>
             ))}
           </div>
+          <div className="flex flex-wrap gap-1">
+            {bookmark.mainTags.map((mainTag, index) => (
+              // TODO - Add style to badge
+              <Badge key={index} variant="outline" className="text-[10px]">
+                {mainTag}
+              </Badge>
+            ))}
+          </div>
           <p>{bookmark.readingStatus}</p>
           <div className="flex">
             {bookmark.workDetails && (

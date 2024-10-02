@@ -15,6 +15,7 @@ import CommentField from "@/components/userBookmarkForm/commentField";
 import FavoriteField from "@/components/userBookmarkForm/favoriteField";
 import IsDownloadedField from "@/components/userBookmarkForm/isDownloadedField";
 import MainTagsField from "@/components/userBookmarkForm/mainTagsField";
+import OtherTagsField from "@/components/userBookmarkForm/otherTagsField";
 import RatingField from "@/components/userBookmarkForm/ratingField";
 import ReadingStatusField from "@/components/userBookmarkForm/readingStatusField";
 
@@ -29,8 +30,8 @@ export default function WorkForm({ latestChapter, onSubmit }: WorkFormProps) {
     defaultValues: {
       readingStatus: "To Read",
       currentChapter: 0,
-      ships: [],
-      customTags: [],
+      mainTags: [],
+      otherTags: [],
       isDownloaded: false,
       favorite: false,
       rating: 0,
@@ -46,6 +47,7 @@ export default function WorkForm({ latestChapter, onSubmit }: WorkFormProps) {
           <ChapterField control={form.control} latestChapter={latestChapter} />
           <RatingField control={form.control} />
           <MainTagsField control={form.control} />
+          <OtherTagsField control={form.control} />
           <IsDownloadedField control={form.control} />
           <FavoriteField control={form.control} />
           <CommentField control={form.control} />

@@ -5,21 +5,21 @@ import { BookmarkForm } from "@/types/bookmarkInfo";
 import { FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { SelectTagInput } from "@/components/ui/select-tag-input";
 
-interface MainTagsFieldProps {
+interface OtherTagsFieldProps {
   control: Control<BookmarkForm>;
 }
 
-export default function RatingField({ control }: MainTagsFieldProps) {
+export default function RatingField({ control }: OtherTagsFieldProps) {
   // TODO: Fetch tags from DB
   const options = ["tag", "tag2", "rag3", "best ship"];
 
   return (
     <FormField
       control={control}
-      name="mainTags"
+      name="otherTags"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Main Tags</FormLabel>
+          <FormLabel>Other Tags</FormLabel>
           <SelectTagInput
             value={field.value}
             onChange={field.onChange}

@@ -6,8 +6,8 @@ export const formSchema = z.object({
   currentChapter: z.coerce
     .number()
     .min(0, { message: "Please input a valid chapter number." }),
-  ships: z.array(z.string()),
-  customTags: z.array(z.string()),
+  mainTags: z.array(z.string()),
+  otherTags: z.array(z.string()),
   isDownloaded: z.boolean(),
   favorite: z.boolean(),
   rating: z.coerce
