@@ -72,9 +72,9 @@ export default function Home() {
       <h1>Enter Fic URL</h1>
       <WorkPreview setWorkInfo={getWorkInformation} />
       {work && <WorkCard work={work} />}
-      {work && (
-        <WorkForm latestChapter={latestChapter} onSubmit={handleSaveWork} />
-      )}
+      {/* {work && ( */}
+      <WorkForm latestChapter={latestChapter} onSubmit={handleSaveWork} />
+      {/* )} */}
       {saveStatus}
     </div>
   );

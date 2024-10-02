@@ -7,15 +7,16 @@ import { formSchema } from "@/lib/formSchema";
 
 import { BookmarkForm } from "@/types/bookmarkInfo";
 
-import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
 
-import ReadingStatusField from "@/components/userBookmarkForm/readingStatusField";
 import ChapterField from "@/components/userBookmarkForm/chapterField";
-import RatingField from "@/components/userBookmarkForm/ratingField";
-import IsDownloadedField from "@/components/userBookmarkForm/isDownloadedField";
-import FavoriteField from "@/components/userBookmarkForm/favoriteField";
 import CommentField from "@/components/userBookmarkForm/commentField";
+import FavoriteField from "@/components/userBookmarkForm/favoriteField";
+import IsDownloadedField from "@/components/userBookmarkForm/isDownloadedField";
+import MainTagsField from "@/components/userBookmarkForm/mainTagsField";
+import RatingField from "@/components/userBookmarkForm/ratingField";
+import ReadingStatusField from "@/components/userBookmarkForm/readingStatusField";
 
 interface WorkFormProps {
   latestChapter: number;
@@ -44,6 +45,7 @@ export default function WorkForm({ latestChapter, onSubmit }: WorkFormProps) {
           <ReadingStatusField control={form.control} />
           <ChapterField control={form.control} latestChapter={latestChapter} />
           <RatingField control={form.control} />
+          <MainTagsField control={form.control} />
           <IsDownloadedField control={form.control} />
           <FavoriteField control={form.control} />
           <CommentField control={form.control} />
