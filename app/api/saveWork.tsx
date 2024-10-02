@@ -5,10 +5,10 @@ export const saveWork = async (work: WorkInfo): Promise<string> => {
   const workData = {
     work_ID: work.workID,
     work_link: work.workLink,
+    fetch_date: work.fetchDate,
     title: work.workBasicInfo.title,
     author: work.workBasicInfo.author,
     summary: work.workBasicInfo.summary,
-    fetch_date: work.workBasicInfo.fetchDate,
     rating: work.workTags.rating,
     archive_warnings: work.workTags.archiveWarnings,
     categories: work.workTags.categories,

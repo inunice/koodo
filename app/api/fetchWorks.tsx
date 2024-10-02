@@ -19,11 +19,11 @@ export const fetchWorks = async (
     const workInfo: WorkInfo = {
       workID: work.work_ID,
       workLink: work.work_link,
+      fetchDate: new Date(work.fetch_date),
       workBasicInfo: {
         title: work.title,
         author: work.author,
         summary: work.summary,
-        fetchDate: new Date(work.fetch_date),
       },
       workTags: {
         rating: work.rating,

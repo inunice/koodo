@@ -37,11 +37,11 @@ export async function GET(req: NextRequest) {
 
     workInfo.workID = workID;
     workInfo.workLink = url;
+    workInfo.fetchDate = new Date();
     workInfo.workBasicInfo = {
       title: $("h2.title").text().trim(),
       author: getTextArray($, 'a[rel="author"]'),
       summary: getTextArray($, "div.preface div.summary p:not(.chapter p)"),
-      fetchDate: new Date(),
     };
 
     console.log(workInfo.workBasicInfo);

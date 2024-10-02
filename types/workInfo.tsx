@@ -3,6 +3,7 @@ export interface WorkDetails {
   workLink: string;
   workTags: WorkTags;
   workStats: WorkStats;
+  fetchDate: Date;
 }
 
 export interface WorkInfo extends WorkDetails {
@@ -13,7 +14,6 @@ export interface WorkBasicInfo {
   title: string;
   author: string[];
   summary: string[];
-  fetchDate: Date;
 }
 
 export type WorkRating =

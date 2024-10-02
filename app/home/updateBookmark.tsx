@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/tooltip";
 
 interface UpdateBookmarkProps {
-  fetchDate: Date;
+  fetchDate: Date | undefined;
 }
 
 export default function UpdateBookmark({ fetchDate }: UpdateBookmarkProps) {
@@ -17,7 +17,11 @@ export default function UpdateBookmark({ fetchDate }: UpdateBookmarkProps) {
       <Tooltip>
         <TooltipTrigger>u</TooltipTrigger>
         <TooltipContent>
-          <span>Last updated: {format(new Date(fetchDate), "PP")}</span>
+          {fetchDate === undefined ? (
+            <span>Reload work</span>
+          ) : (
+            <span>Last updated: {format(new Date(fetchDate), "PP")}</span>
+          )}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

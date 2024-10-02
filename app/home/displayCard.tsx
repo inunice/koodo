@@ -40,7 +40,7 @@ export default function DisplayCard({ bookmark }: DisplayCardProps) {
       <CardFooter className="w-full flex flex-row p-0 justify-between">
         <p>{bookmark.readingStatus}</p>
         <div className="flex flex-row gap-1">
-          <UpdateBookmark fetchDate={bookmark.workBasicInfo.fetchDate} />
+          <UpdateBookmark fetchDate={bookmark.workDetails?.fetchDate} />
           <OpenWorkLink workID={bookmark.workID} />
         </div>
       </CardFooter>
