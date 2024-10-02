@@ -46,6 +46,7 @@ export async function GET(req: NextRequest) {
       title: $("h2.title").text().trim(),
       author: $('a[rel="author"]').text(),
       summary,
+      fetchDate: new Date(),
     };
     workInfo.workTags = {
       rating: $("dd.rating").text().trim(),
@@ -79,6 +80,7 @@ export async function GET(req: NextRequest) {
       bookmarks: getNumberFromText($, "dd.bookmarks"),
       hits: getNumberFromText($, "dd.hits"),
       status: totalChapters === 0 ? "In Progress" : "Complete",
+      workType: totalChapters === 1 ? "One Shot" : "Multi Chapter",
     };
 
     return new NextResponse(JSON.stringify(workInfo), {

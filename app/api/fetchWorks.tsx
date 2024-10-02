@@ -8,7 +8,7 @@ export const fetchWorks = async (
   const { data, error } = await supabase
     .from("works")
     .select("*")
-    .in("workID", workIDs);
+    .in("work_ID", workIDs);
 
   if (error) {
     console.error("Error fetching works:", error);
@@ -17,34 +17,36 @@ export const fetchWorks = async (
 
   return data.map((work) => {
     const workInfo: WorkInfo = {
-      workID: work.workID,
-      workLink: work.workLink,
+      workID: work.work_ID,
+      workLink: work.work_link,
       workBasicInfo: {
         title: work.title,
         author: work.author,
         summary: work.summary,
+        fetchDate: new Date(work.fetch_date),
       },
       workTags: {
         rating: work.rating,
-        archiveWarnings: work.archiveWarnings,
+        archiveWarnings: work.archive_warnings,
         categories: work.categories,
         fandoms: work.fandoms,
         relationships: work.relationships,
         characters: work.characters,
-        additionalTags: work.additionalTags,
+        additionalTags: work.additional_tags,
         language: work.language,
       },
       workStats: {
-        publishedDate: new Date(work.publishedDate),
-        lastestUpdateDate: new Date(work.lastestUpdateDate),
+        publishedDate: new Date(work.published_date),
+        lastestUpdateDate: new Date(work.lastest_update_date),
         words: work.words,
-        latestChapter: work.latestChapter,
-        totalChapters: work.totalChapters,
+        latestChapter: work.latest_chapter,
+        totalChapters: work.total_chapters,
         comments: work.comments,
         kudos: work.kudos,
         bookmarks: work.bookmarks,
         hits: work.hits,
         status: work.status,
+        workType: work.work_type,
       },
     };
 

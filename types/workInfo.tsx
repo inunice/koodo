@@ -13,16 +13,17 @@ export interface WorkBasicInfo {
   title: string;
   author: string;
   summary: string;
+  fetchDate: Date;
 }
 
-export type workRating =
+export type WorkRating =
   | "General Audiences"
   | "Teen And Up Audiences"
   | "Mature"
   | "Explicit"
   | "Not Rated";
 
-export type archiveWarning =
+export type ArchiveWarning =
   | "Choose Not To Use Archive Warnings"
   | "Graphic Depictions Of Violence"
   | "Major Character Death"
@@ -30,12 +31,14 @@ export type archiveWarning =
   | "Rape/Non-Con"
   | "Underage";
 
-export type category = "F/M" | "F/F" | "M/M" | "Multi" | "Gen" | "Other";
+export type Category = "F/M" | "F/F" | "M/M" | "Multi" | "Gen" | "Other";
+
+export type WorkType = "One Shot" | "Multi Chapter";
 
 export interface WorkTags {
-  rating: workRating;
-  archiveWarnings: archiveWarning[];
-  categories: category[];
+  rating: WorkRating;
+  archiveWarnings: ArchiveWarning[];
+  categories: Category[];
   fandoms: string[];
   relationships: string[];
   characters: string[];
@@ -54,4 +57,5 @@ export interface WorkStats {
   bookmarks: number;
   hits: number;
   status: "Complete" | "In Progress";
+  workType: WorkType;
 }
