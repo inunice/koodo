@@ -8,8 +8,8 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 
+import DisplayBadges from "./displayBadges";
 import UpdateBookmark from "./updateBookmark";
 import OpenWorkLink from "./openWorkLink";
 
@@ -19,7 +19,7 @@ interface DisplayCardProps {
 
 export default function DisplayCard({ bookmark }: DisplayCardProps) {
   return (
-    <Card className="w-full flex flex-col items-start px-6 py-5 gap-1 align-left">
+    <Card className="w-full flex flex-col items-start px-5 py-4 gap-1 align-left">
       <CardHeader className="p-0">
         <div className="flex flex-wrap gap-0 items-baseline">
           <span className="text-lg pr-2">{bookmark.workBasicInfo.title}</span>
@@ -28,19 +28,11 @@ export default function DisplayCard({ bookmark }: DisplayCardProps) {
           </span>
         </div>
       </CardHeader>
-      <CardContent className="p-0">
-        <div className="flex flex-wrap gap-1">
-          {bookmark.mainTags.map((mainTag, index) => (
-            <Badge key={index} className="text-[10px]">
-              {mainTag}
-            </Badge>
-          ))}
-          {bookmark.workDetails?.workTags.fandoms.map((fandom, index) => (
-            <Badge key={index} variant="outline" className="text-[10px]">
-              {fandom}
-            </Badge>
-          ))}
-        </div>
+      <CardContent className="w-full p-0">
+        <DisplayBadges
+          mainTags={bookmark.mainTags}
+          fandoms={bookmark.workDetails?.workTags.fandoms}
+        />
         <p className="text-xs text-justify line-clamp-4 text-gray-700">
           {bookmark.workBasicInfo.summary.join(" ")}
         </p>
