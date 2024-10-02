@@ -24,7 +24,7 @@ export default function DisplayCard({ bookmark }: DisplayCardProps) {
         <div className="flex flex-wrap gap-1 items-baseline leading-1">
           <span className="text-lg pr-1">{bookmark.workBasicInfo.title}</span>
           <span className="text-sm text-gray-700">
-            {bookmark.workBasicInfo.author}
+            {bookmark.workBasicInfo.author.join(" ")}
           </span>
         </div>
       </CardHeader>
@@ -42,7 +42,7 @@ export default function DisplayCard({ bookmark }: DisplayCardProps) {
           ))}
         </div>
         <p className="text-xs text-justify line-clamp-4 text-gray-700">
-          {bookmark.workBasicInfo.summary}
+          {bookmark.workBasicInfo.summary.join(" ")}
         </p>
       </CardContent>
       <CardFooter className="w-full flex flex-row p-0 justify-between">

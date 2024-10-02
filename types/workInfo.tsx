@@ -11,8 +11,8 @@ export interface WorkInfo extends WorkDetails {
 
 export interface WorkBasicInfo {
   title: string;
-  author: string;
-  summary: string;
+  author: string[];
+  summary: string[];
   fetchDate: Date;
 }
 

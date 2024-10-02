@@ -33,21 +33,18 @@ export async function GET(req: NextRequest) {
     const htmlString = await response.text();
     const $ = cheerio.load(htmlString);
 
-    const summary = $("div.summary p")
-      .map((i: any, el: any) => $(el).text())
-      .get()
-      .join("\n");
-
     const workInfo: Partial<WorkInfo> = {};
 
     workInfo.workID = workID;
     workInfo.workLink = url;
     workInfo.workBasicInfo = {
       title: $("h2.title").text().trim(),
-      author: $('a[rel="author"]').text(),
-      summary,
+      author: getTextArray($, 'a[rel="author"]'),
+      summary: getTextArray($, "div.preface div.summary p:not(.chapter p)"),
       fetchDate: new Date(),
     };
+
+    console.log(workInfo.workBasicInfo);
     workInfo.workTags = {
       rating: $("dd.rating").text().trim(),
       archiveWarnings: getTextArray($, "dd.warning ul li"),
