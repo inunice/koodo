@@ -12,6 +12,7 @@ import {
 import DisplayBadges from "./displayBadges";
 import UpdateBookmark from "./updateBookmark";
 import OpenWorkLink from "./openWorkLink";
+import SelectReadingStatus from "./selectReadingStatus";
 
 interface DisplayCardProps {
   bookmark: Bookmark;
@@ -37,8 +38,8 @@ export default function DisplayCard({ bookmark }: DisplayCardProps) {
           {bookmark.workBasicInfo.summary.join(" ")}
         </p>
       </CardContent>
-      <CardFooter className="w-full flex flex-row p-0 justify-between">
-        <p>{bookmark.readingStatus}</p>
+      <CardFooter className="w-full flex flex-row p-0 gap-10 justify-between">
+        <SelectReadingStatus bookmark={bookmark} />
         <div className="flex flex-row gap-1">
           <UpdateBookmark fetchDate={bookmark.workDetails?.fetchDate} />
           <OpenWorkLink workID={bookmark.workID} />

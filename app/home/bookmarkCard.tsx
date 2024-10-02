@@ -1,11 +1,12 @@
 "use client";
 
+import { useState } from "react";
+
 import { Bookmark } from "@/types/bookmarkInfo";
 
 import {
   Dialog,
   DialogTitle,
-  DialogTrigger,
   DialogContent,
   DialogDescription,
 } from "@/components/ui/dialog";
@@ -17,22 +18,31 @@ interface BookmarkCardProps {
 }
 
 export default function WorkCard({ bookmark }: BookmarkCardProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpenDialog = () => {
+    setIsOpen(true);
+  };
+
   return (
-    <Dialog>
-      <DialogTrigger>
+    <>
+      <div onClick={handleOpenDialog}>
         <DisplayCard bookmark={bookmark} />
-      </DialogTrigger>
-      <DialogContent>
-        <DialogTitle>{bookmark.workBasicInfo.title}</DialogTitle>
-        <DialogDescription asChild>
-          <div>
-            <p>{bookmark.workBasicInfo.author}</p>
-            <p>{bookmark.workBasicInfo.summary}</p>
-            <p>{bookmark.readingStatus}</p>
-            <p>{bookmark.comment}</p>
-          </div>
-        </DialogDescription>
-      </DialogContent>
-    </Dialog>
+      </div>
+
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContent>
+          <DialogTitle>{bookmark.workBasicInfo.title}</DialogTitle>
+          <DialogDescription asChild>
+            <div>
+              <p>{bookmark.workBasicInfo.author}</p>
+              <p>{bookmark.workBasicInfo.summary}</p>
+              <p>{bookmark.readingStatus}</p>
+              <p>{bookmark.comment}</p>
+            </div>
+          </DialogDescription>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
