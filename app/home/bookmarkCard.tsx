@@ -19,10 +19,8 @@ interface BookmarkCardProps {
 export default function WorkCard({ bookmark }: BookmarkCardProps) {
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <button className="w-full text-left">
-          <DisplayCard bookmark={bookmark} />
-        </button>
+      <DialogTrigger>
+        <DisplayCard bookmark={bookmark} />
       </DialogTrigger>
       <DialogContent>
         <DialogTitle>{bookmark.workBasicInfo.title}</DialogTitle>

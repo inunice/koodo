@@ -21,8 +21,8 @@ export default function DisplayCard({ bookmark }: DisplayCardProps) {
   return (
     <Card className="w-full flex flex-col items-start px-6 py-5 gap-1 align-left">
       <CardHeader className="p-0">
-        <div className="flex flex-wrap gap-1 items-baseline leading-1">
-          <span className="text-lg pr-1">{bookmark.workBasicInfo.title}</span>
+        <div className="flex flex-wrap gap-0 items-baseline">
+          <span className="text-lg pr-2">{bookmark.workBasicInfo.title}</span>
           <span className="text-sm text-gray-700">
             {bookmark.workBasicInfo.author.join(" ")}
           </span>
