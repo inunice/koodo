@@ -80,7 +80,7 @@ export default function WorkCard({
   return (
     <>
       <div onClick={handleOpenDialog}>
-        <DisplayCard bookmark={bookmark} />
+        <DisplayCard bookmark={bookmark} onUpdate={onUpdate} />
       </div>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>

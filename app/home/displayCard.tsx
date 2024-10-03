@@ -16,9 +16,10 @@ import SelectReadingStatus from "./cardButtons/selectReadingStatus";
 
 interface DisplayCardProps {
   bookmark: Bookmark;
+  onUpdate: (updatedBookmark: Bookmark) => void;
 }
 
-export default function DisplayCard({ bookmark }: DisplayCardProps) {
+export default function DisplayCard({ bookmark, onUpdate }: DisplayCardProps) {
   return (
     <Card className="w-full flex flex-col items-start px-5 py-4 gap-2 align-left">
       <CardHeader className="p-0">
@@ -41,7 +42,7 @@ export default function DisplayCard({ bookmark }: DisplayCardProps) {
         </p>
       </CardContent>
       <CardFooter className="w-full flex flex-row p-0 pt-2 gap-10 justify-between">
-        <SelectReadingStatus bookmark={bookmark} />
+        <SelectReadingStatus bookmark={bookmark} onUpdate={onUpdate} />
         <div className="flex flex-row gap-1 h-6">
           <UpdateBookmark bookmark={bookmark} />
           <OpenWorkLink workID={bookmark.workID} />

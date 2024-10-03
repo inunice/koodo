@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import { updateReadingStatus } from "@/app/api/updateReadingStatus";
+import { addBookmark } from "@/app/api/addBookmark";
 
 import { Bookmark, ReadingStatus, readingStatus } from "@/types/bookmarkInfo";
 
@@ -16,26 +16,31 @@ import {
 
 interface SelectReadingStatusProps {
   bookmark: Bookmark;
+  onUpdate: (updatedBookmark: Bookmark) => void;
 }
 
 export default function SelectReadingStatus({
   bookmark,
+  onUpdate,
 }: SelectReadingStatusProps) {
   const [currentReadingStatus, setCurrentReadingStatus] = useState(
     bookmark.readingStatus
   );
 
   const handleStatusChange = (newReadingStatus: ReadingStatus) => {
-    bookmark.readingStatus = newReadingStatus;
+    const updatedBookmark = { ...bookmark, readingStatus: newReadingStatus };
     setCurrentReadingStatus(newReadingStatus);
-    updateReadingStatus(bookmark.workID, newReadingStatus);
+    addBookmark(bookmark.workID, newReadingStatus);
+
+    onUpdate(updatedBookmark);
   };
 
+  useEffect(() => {
+    setCurrentReadingStatus(bookmark.readingStatus);
+  }, [bookmark]);
+
   return (
-    <Select
-      onValueChange={handleStatusChange}
-      defaultValue={currentReadingStatus}
-    >
+    <Select onValueChange={handleStatusChange} value={currentReadingStatus}>
       <SelectTrigger>
         <SelectValue placeholder="Select status" />
       </SelectTrigger>

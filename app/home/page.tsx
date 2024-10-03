@@ -63,6 +63,7 @@ export default function Home() {
         bookmark.workID === updatedBookmark.workID ? updatedBookmark : bookmark
       )
     );
+    console.log(bookmarks);
   };
 
   return (
