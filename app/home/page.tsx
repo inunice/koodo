@@ -12,6 +12,8 @@ import { WorkDetails } from "@/types/workInfo";
 import BookmarkCard from "./bookmarkCard";
 import { Button } from "@/components/ui/button";
 
+import { BookmarkAddIcon } from "@/assets/icon/bookmark";
+
 export default function Home() {
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
 
@@ -69,12 +71,7 @@ export default function Home() {
   return (
     <div>
       <span>Home</span>
-      <div>
-        <Button asChild>
-          <Link href="/add">Add work</Link>
-        </Button>
-      </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 px-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 px-3">
         {bookmarks.map((bookmark, index) => (
           <BookmarkCard
             key={index}
@@ -83,6 +80,14 @@ export default function Home() {
             onUpdate={handleUpdateBookmark}
           />
         ))}
+
+        <div className="fixed bottom-5 right-5">
+          <Button asChild className="w-16 h-16">
+            <Link href="/add">
+              <BookmarkAddIcon className="w-full h-full" />
+            </Link>
+          </Button>
+        </div>
       </div>
     </div>
   );

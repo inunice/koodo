@@ -23,7 +23,7 @@ interface DisplayCardProps {
 
 export default function DisplayCard({ bookmark, onUpdate }: DisplayCardProps) {
   return (
-    <Card className="w-full flex flex-col items-start px-5 py-4 gap-2 align-left">
+    <Card className="w-full flex flex-col items-start px-6 py-6 gap-2 align-left">
       <CardHeader className="p-0">
         <div className="items-baseline flex flex-wrap gap-1">
           {bookmark.favorite && <HeartFilled className="w-3 h-3" />}

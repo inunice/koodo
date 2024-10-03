@@ -50,11 +50,8 @@ export default function UpdateBookmark({ bookmark }: UpdateBookmarkProps) {
   return (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger>
-          <RecentlyViewedIcon
-            onClick={handleGetWorkInfo}
-            color={bookmark.workDetails === undefined ? "pink" : "#999999"}
-          />
+        <TooltipTrigger onClick={handleGetWorkInfo}>
+          <RecentlyViewedIcon className="w-5 h-5" />
         </TooltipTrigger>
         <TooltipContent>
           {bookmark.workDetails === undefined ? (
