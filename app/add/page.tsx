@@ -26,7 +26,7 @@ export default function Home() {
 
   const getWorkInformation = (work: WorkInfo | null) => {
     setWork(work);
-    setLatestChapter(work ? Math.max(work.workStats.latestChapter) : 0);
+    setLatestChapter(work ? work.workStats.latestChapter : 0);
   };
 
   const handleSaveWork = async (bookmarkInformation: BookmarkForm) => {

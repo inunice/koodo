@@ -89,11 +89,13 @@ export default function WorkCard({
           <DialogDescription asChild>
             <div>
               <p>{bookmark.workBasicInfo.author}</p>
-              <p>{bookmark.workBasicInfo.summary}</p>
+              <p className="line-clamp-3">{bookmark.workBasicInfo.summary}</p>
               <p>{bookmark.readingStatus}</p>
               <p>{bookmark.comment}</p>
               <EditBookmarkForm
-                latestChapter={bookmark.currentChapter}
+                latestChapter={
+                  bookmark.workDetails?.workStats.latestChapter || 0
+                }
                 initialValues={bookmarkForm}
                 onSubmit={handleUpdateBookmark}
               />

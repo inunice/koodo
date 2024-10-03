@@ -36,9 +36,9 @@ export default function RatingField({ control }: RatingFieldProps) {
               </SelectTrigger>
             </FormControl>
             <SelectContent>
-              {Array.from({ length: 10 }, (_, i) => (
+              {Array.from({ length: 11 }, (_, i) => (
                 <SelectItem key={i} value={(i * 0.5).toString()}>
-                  {(i * 0.5).toFixed(1)}
+                  {i * 0.5}
                 </SelectItem>
               ))}
             </SelectContent>

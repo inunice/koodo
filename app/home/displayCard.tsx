@@ -14,6 +14,8 @@ import UpdateBookmark from "./cardButtons/updateBookmark";
 import OpenWorkLink from "./cardButtons/openWorkLink";
 import SelectReadingStatus from "./cardButtons/selectReadingStatus";
 
+import { HeartFilled } from "@/assets/icon/heart";
+
 interface DisplayCardProps {
   bookmark: Bookmark;
   onUpdate: (updatedBookmark: Bookmark) => void;
@@ -23,8 +25,9 @@ export default function DisplayCard({ bookmark, onUpdate }: DisplayCardProps) {
   return (
     <Card className="w-full flex flex-col items-start px-5 py-4 gap-2 align-left">
       <CardHeader className="p-0">
-        <div className="items-baseline">
-          <span className="text-lg pr-2 leading-3">
+        <div className="items-baseline flex flex-wrap gap-1">
+          {bookmark.favorite && <HeartFilled className="w-3 h-3" />}
+          <span className="text-md pr-1 font-bold leading-3">
             {bookmark.workBasicInfo.title}
           </span>
           <span className="text-sm text-gray-700 leading-3">
@@ -37,7 +40,7 @@ export default function DisplayCard({ bookmark, onUpdate }: DisplayCardProps) {
           mainTags={bookmark.mainTags}
           fandoms={bookmark.workDetails?.workTags.fandoms}
         />
-        <p className="text-xs text-justify line-clamp-4 text-gray-700">
+        <p className="text-xs text-justify line-clamp-4 text-gray-500">
           {bookmark.workBasicInfo.summary.join(" ")}
         </p>
       </CardContent>
