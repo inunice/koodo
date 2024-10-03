@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+
+import { useToast } from "@/hooks/use-toast";
 
 import { saveWork } from "@/app/api/saveWork";
 import { addUserBookmark } from "@/app/api/addUserBookmark";
@@ -14,8 +16,10 @@ import WorkPreview from "./workPreview";
 import WorkForm from "./workForm";
 
 export default function Home() {
+  const { toast } = useToast();
+  const router = useRouter();
+
   const [work, setWork] = useState<WorkInfo | null>(null);
-  const [saveStatus, setSaveStatus] = useState<string | null>(null);
   const [latestChapter, setLatestChapter] = useState<number>(0);
 
   const getWorkInformation = (work: WorkInfo | null) => {
@@ -26,8 +30,11 @@ export default function Home() {
   const handleSaveWork = async (bookmarkInformation: BookmarkForm) => {
     if (work) {
       const statusMessage = await saveWork(work);
-      if (statusMessage === "Success") {
-        setSaveStatus("Work added successfully!");
+      if (statusMessage === "success") {
+        toast({
+          title: "Yay!",
+          description: "Bookmark added successfully!",
+        });
 
         const newBookmark: UserBookmark = {
           userID: 1,
@@ -42,26 +49,18 @@ export default function Home() {
           rating: bookmarkInformation.rating,
           comment: bookmarkInformation.comment,
         };
+
         console.log(newBookmark);
         await addUserBookmark(newBookmark);
-      } else if (
-        statusMessage ===
-        'duplicate key value violates unique constraint "works_pkey"'
-      ) {
-        setSaveStatus("Work already exists in database");
+        router.push("/home");
       } else {
-        setSaveStatus("Error adding work to database");
+        toast({
+          title: "Uh oh!",
+          description: "Error adding work to database!",
+        });
       }
     }
   };
-
-  const router = useRouter();
-
-  useEffect(() => {
-    if (saveStatus === "Work added successfully!") {
-      router.push("/home");
-    }
-  }, [saveStatus, router]);
 
   return (
     <div>
@@ -71,7 +70,6 @@ export default function Home() {
       {work && (
         <WorkForm latestChapter={latestChapter} onSubmit={handleSaveWork} />
       )}
-      {saveStatus}
     </div>
   );
 }
