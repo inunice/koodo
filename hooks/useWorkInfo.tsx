@@ -2,12 +2,9 @@ import { useState } from "react";
 import { WorkInfo } from "@/types/workInfo";
 
 export default function useWorkInfo() {
-  const [link, setLink] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const getWorkInformation = async (
-    setWorkInfo: (work: WorkInfo | null) => void
-  ) => {
+  const getWorkInformation = async (link: string): Promise<WorkInfo | null> => {
     try {
       if (!link.startsWith("https://archiveofourown.org/works/")) {
         throw new Error(
@@ -25,8 +22,8 @@ export default function useWorkInfo() {
         }
       );
       const work = await response.json();
-      setWorkInfo(work);
       setErrorMessage(null);
+      return work;
     } catch (error) {
       console.error("Error fetching data:", error);
 
@@ -36,9 +33,9 @@ export default function useWorkInfo() {
         setErrorMessage("An unknown error occurred");
       }
 
-      setWorkInfo(null);
+      return null;
     }
   };
 
-  return { link, setLink, errorMessage, getWorkInformation };
+  return { getWorkInformation, errorMessage };
 }
