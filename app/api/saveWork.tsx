@@ -39,6 +39,6 @@ export const saveWork = async (work: WorkInfo): Promise<string> => {
     return error.message;
   } else {
     console.log("Work added/updated in database");
-    return "Success";
+    return "success";
   }
 };

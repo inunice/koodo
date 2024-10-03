@@ -1,17 +1,19 @@
 "use client";
 
 import { useState } from "react";
+
+import useWorkInfo from "@/hooks/useWorkInfo";
+
+import { WorkInfo } from "@/types/workInfo";
+
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import useWorkInfo from "@/hooks/useWorkInfo";
-import { WorkInfo } from "@/types/workInfo"; // Assuming you have a type for WorkInfo
 
-export default function WorkPreview({
-  setWorkInfo,
-}: {
+interface WorkPreviewProps {
   setWorkInfo: (work: WorkInfo | null) => void;
-}) {
-  const { getWorkInformation, errorMessage } = useWorkInfo();
+}
+export default function WorkPreview({ setWorkInfo }: WorkPreviewProps) {
+  const { getWorkInformation, errorMessage, loading } = useWorkInfo();
   const [link, setLink] = useState("");
 
   const handleGetWorkInfo = async () => {
@@ -30,7 +32,9 @@ export default function WorkPreview({
           onChange={(e) => setLink(e.target.value)}
           placeholder="Enter work link"
         />
-        <Button onClick={handleGetWorkInfo}>Get work info</Button>
+        <Button onClick={handleGetWorkInfo} disabled={loading}>
+          {loading ? "Fetching..." : "Get work info"}
+        </Button>
       </div>
       {errorMessage && (
         <Alert variant="destructive">

@@ -3,8 +3,11 @@ import { WorkInfo } from "@/types/workInfo";
 
 export default function useWorkInfo() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const getWorkInformation = async (link: string): Promise<WorkInfo | null> => {
+    setLoading(true);
+
     try {
       if (!link.startsWith("https://archiveofourown.org/works/")) {
         throw new Error(
@@ -21,6 +24,7 @@ export default function useWorkInfo() {
           method: "GET",
         }
       );
+
       const work = await response.json();
       setErrorMessage(null);
       return work;
@@ -34,8 +38,10 @@ export default function useWorkInfo() {
       }
 
       return null;
+    } finally {
+      setLoading(false);
     }
   };
 
-  return { getWorkInformation, errorMessage };
+  return { getWorkInformation, errorMessage, loading };
 }
