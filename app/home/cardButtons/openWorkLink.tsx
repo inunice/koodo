@@ -7,7 +7,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import { LinkIcon } from "@/public/icon/link";
+import { LinkIcon } from "@/assets/icon/link";
 
 interface OpenWorkLinkProps {
   workID: number;

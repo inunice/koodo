@@ -13,7 +13,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import { RecentlyViewedIcon } from "@/public/icon/recentlyViewed";
+import { RecentlyViewedIcon } from "@/assets/icon/recentlyViewed";
 
 interface UpdateBookmarkProps {
   bookmark: Bookmark;

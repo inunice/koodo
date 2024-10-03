@@ -39,15 +39,30 @@ export default function EditBookmarkForm({
     <div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <ReadingStatusField control={form.control} />
-          <ChapterField control={form.control} latestChapter={latestChapter} />
-          <RatingField control={form.control} />
+          <div className="flex flex-row gap-3">
+            <div className="flex-1">
+              <ReadingStatusField control={form.control} />
+            </div>
+            <div className="flex-1">
+              <ChapterField
+                control={form.control}
+                latestChapter={latestChapter}
+              />
+            </div>
+          </div>
+          <div className="flex flex-row gap-3 items-center">
+            <div className="flex-1">
+              <RatingField control={form.control} />
+            </div>
+            <div className="w-10">
+              <FavoriteField control={form.control} />
+            </div>
+          </div>
           <MainTagsField control={form.control} />
           <OtherTagsField control={form.control} />
           <IsDownloadedField control={form.control} />
-          <FavoriteField control={form.control} />
           <CommentField control={form.control} />
-          <Button>Update Bookmark!</Button>
+          <Button>Update</Button>
         </form>
       </Form>
     </div>

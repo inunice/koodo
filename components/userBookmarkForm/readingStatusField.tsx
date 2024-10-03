@@ -28,8 +28,8 @@ export default function ReadingStatusField({
       control={control}
       name="readingStatus"
       render={({ field }) => (
-        <FormItem>
-          <FormLabel>readingStatus</FormLabel>
+        <FormItem className="flex items-center gap-2">
+          <FormLabel>Status</FormLabel>
           <Select onValueChange={field.onChange} defaultValue={field.value}>
             <FormControl>
               <SelectTrigger>

@@ -23,7 +23,7 @@ export default function RatingField({ control }: MainTagsFieldProps) {
           <SelectTagInput
             value={field.value}
             onChange={field.onChange}
-            placeholder="Enter values, comma separated..."
+            placeholder=""
             className="max-w-[500px]"
             options={options}
           />

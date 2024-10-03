@@ -1,7 +1,5 @@
 import { Control } from "react-hook-form";
-
 import { BookmarkForm } from "@/types/bookmarkInfo";
-
 import {
   FormField,
   FormItem,
@@ -16,22 +14,22 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-interface chapterFieldProps {
+interface ChapterFieldProps {
   control: Control<BookmarkForm>;
   latestChapter: number;
 }
 
-export default function chapterField({
+export default function ChapterField({
   control,
   latestChapter,
-}: chapterFieldProps) {
+}: ChapterFieldProps) {
   return (
     <FormField
       control={control}
       name="currentChapter"
       render={({ field }) => (
-        <FormItem>
-          <FormLabel>CurrentChapter</FormLabel>
+        <FormItem className="flex items-center gap-2">
+          <FormLabel className="whitespace-nowrap">Chapter</FormLabel>
           <Select onValueChange={field.onChange}>
             <FormControl>
               <SelectTrigger>
