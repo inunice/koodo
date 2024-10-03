@@ -23,6 +23,7 @@ export interface UserBookmark extends BookmarkForm {
   workID: number;
   workBasicInfo: WorkBasicInfo;
   addDate: Date;
+  updateDate: Date;
 }
 
 export interface Bookmark extends UserBookmark {

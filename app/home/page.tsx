@@ -57,6 +57,14 @@ export default function Home() {
     );
   };
 
+  const handleUpdateBookmark = (updatedBookmark: Bookmark) => {
+    setBookmarks((prevBookmarks) =>
+      prevBookmarks.map((bookmark) =>
+        bookmark.workID === updatedBookmark.workID ? updatedBookmark : bookmark
+      )
+    );
+  };
+
   return (
     <div>
       <span>Home</span>
@@ -71,6 +79,7 @@ export default function Home() {
             key={index}
             bookmark={bookmark}
             onDelete={handleDeleteBookmark}
+            onUpdate={handleUpdateBookmark}
           />
         ))}
       </div>
