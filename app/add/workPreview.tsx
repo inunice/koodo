@@ -17,7 +17,9 @@ export default function WorkPreview({ setWorkInfo }: WorkPreviewProps) {
   const [link, setLink] = useState("");
 
   const handleGetWorkInfo = async () => {
+    setWorkInfo(null);
     const work = await getWorkInformation(link);
+    console.log(work, errorMessage);
     if (work) {
       setWorkInfo(work);
     }

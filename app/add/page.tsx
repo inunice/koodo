@@ -19,12 +19,8 @@ export default function Home() {
   const [latestChapter, setLatestChapter] = useState<number>(0);
 
   const getWorkInformation = (work: WorkInfo | null) => {
-    if (work) {
-      setWork(work);
-      setLatestChapter(
-        Math.max(work.workStats.latestChapter, work.workStats.totalChapters)
-      );
-    }
+    setWork(work);
+    setLatestChapter(work ? Math.max(work.workStats.latestChapter) : 0);
   };
 
   const handleSaveWork = async (bookmarkInformation: BookmarkForm) => {
@@ -72,9 +68,9 @@ export default function Home() {
       <h1>Enter Fic URL</h1>
       <WorkPreview setWorkInfo={getWorkInformation} />
       {work && <WorkCard work={work} />}
-      {/* {work && ( */}
-      <WorkForm latestChapter={latestChapter} onSubmit={handleSaveWork} />
-      {/* )} */}
+      {work && (
+        <WorkForm latestChapter={latestChapter} onSubmit={handleSaveWork} />
+      )}
       {saveStatus}
     </div>
   );
