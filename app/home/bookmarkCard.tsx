@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import useDeleteBookmark from "@/hooks/useDeleteBookmark";
 import { Bookmark } from "@/types/bookmarkInfo";
 
 import {
@@ -9,19 +10,33 @@ import {
   DialogTitle,
   DialogContent,
   DialogDescription,
+  DialogFooter,
 } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 import DisplayCard from "./displayCard";
 
 interface BookmarkCardProps {
   bookmark: Bookmark;
+  onDelete: (bookmarkId: number) => void;
 }
 
-export default function WorkCard({ bookmark }: BookmarkCardProps) {
+export default function WorkCard({ bookmark, onDelete }: BookmarkCardProps) {
+  const { deleteBookmark, isDeleting } = useDeleteBookmark();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpenDialog = () => {
     setIsOpen(true);
+  };
+
+  const handleDeleteBookmark = async () => {
+    const { status, message } = await deleteBookmark(bookmark);
+    if (status === "success") {
+      setIsOpen(false);
+      onDelete(bookmark.workID);
+    } else {
+      console.error("Failed to delete bookmark:", message);
+    }
   };
 
   return (
@@ -41,6 +56,11 @@ export default function WorkCard({ bookmark }: BookmarkCardProps) {
               <p>{bookmark.comment}</p>
             </div>
           </DialogDescription>
+          <DialogFooter>
+            <Button onClick={handleDeleteBookmark} disabled={isDeleting}>
+              {isDeleting ? "Deleting..." : "Delete"}
+            </Button>{" "}
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </>

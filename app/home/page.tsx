@@ -51,6 +51,12 @@ export default function Home() {
     }));
   };
 
+  const handleDeleteBookmark = (bookmarkId: number) => {
+    setBookmarks((prevBookmarks) =>
+      prevBookmarks.filter((bookmark) => bookmark.workID !== bookmarkId)
+    );
+  };
+
   return (
     <div>
       <span>Home</span>
@@ -61,7 +67,11 @@ export default function Home() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 px-2">
         {bookmarks.map((bookmark, index) => (
-          <BookmarkCard key={index} bookmark={bookmark} />
+          <BookmarkCard
+            key={index}
+            bookmark={bookmark}
+            onDelete={handleDeleteBookmark}
+          />
         ))}
       </div>
     </div>
