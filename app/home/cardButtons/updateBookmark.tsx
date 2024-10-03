@@ -7,6 +7,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
+import { RecentlyViewedIcon } from "@/public/icon/recentlyViewed";
+
 interface UpdateBookmarkProps {
   fetchDate: Date | undefined;
 }
@@ -15,7 +17,11 @@ export default function UpdateBookmark({ fetchDate }: UpdateBookmarkProps) {
   return (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger>u</TooltipTrigger>
+        <TooltipTrigger>
+          <RecentlyViewedIcon
+            color={fetchDate === undefined ? "red" : "#999999"}
+          />
+        </TooltipTrigger>
         <TooltipContent>
           {fetchDate === undefined ? (
             <span>Reload work</span>

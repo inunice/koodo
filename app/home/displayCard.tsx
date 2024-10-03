@@ -10,9 +10,9 @@ import {
 } from "@/components/ui/card";
 
 import DisplayBadges from "./displayBadges";
-import UpdateBookmark from "./updateBookmark";
-import OpenWorkLink from "./openWorkLink";
-import SelectReadingStatus from "./selectReadingStatus";
+import UpdateBookmark from "./cardButtons/updateBookmark";
+import OpenWorkLink from "./cardButtons/openWorkLink";
+import SelectReadingStatus from "./cardButtons/selectReadingStatus";
 
 interface DisplayCardProps {
   bookmark: Bookmark;
@@ -42,7 +42,7 @@ export default function DisplayCard({ bookmark }: DisplayCardProps) {
       </CardContent>
       <CardFooter className="w-full flex flex-row p-0 pt-2 gap-10 justify-between">
         <SelectReadingStatus bookmark={bookmark} />
-        <div className="flex flex-row gap-1">
+        <div className="flex flex-row gap-1 h-6">
           <UpdateBookmark fetchDate={bookmark.workDetails?.fetchDate} />
           <OpenWorkLink workID={bookmark.workID} />
         </div>

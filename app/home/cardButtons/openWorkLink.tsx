@@ -7,6 +7,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
+import { LinkIcon } from "@/public/icon/link";
+
 interface OpenWorkLinkProps {
   workID: number;
 }
@@ -16,7 +18,9 @@ export default function OpenWorkLink({ workID }: OpenWorkLinkProps) {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Link href={"https://archiveofourown.org/works/" + workID}>x</Link>
+          <Link href={"https://archiveofourown.org/works/" + workID}>
+            <LinkIcon color="#999999" />
+          </Link>
         </TooltipTrigger>
         <TooltipContent>
           <span>Read on the archive!</span>
