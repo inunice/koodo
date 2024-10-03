@@ -48,6 +48,7 @@ export default function Home() {
           favorite: bookmarkInformation.favorite,
           rating: bookmarkInformation.rating,
           comment: bookmarkInformation.comment,
+          addDate: new Date(),
         };
 
         console.log(newBookmark);
