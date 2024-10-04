@@ -38,6 +38,8 @@ export function useSaveUserBookmark() {
       comment: bookmark.comment,
       addDate: addDate,
       updateDate: updateDate,
+      startDateReading: bookmark.startDateReading,
+      endDateReading: bookmark.endDateReading,
     };
     setIsLoading(true);
     setError(null);

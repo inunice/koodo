@@ -9,7 +9,7 @@ import { saveWork } from "@/app/api/saveWork";
 import { useSaveUserBookmark } from "@/hooks/useSaveUserBookmark";
 
 import { WorkInfo } from "@/types/workInfo";
-import { UserBookmark, BookmarkForm } from "@/types/bookmarkInfo";
+import { BookmarkForm } from "@/types/bookmarkInfo";
 
 import WorkCard from "./workCard";
 import WorkPreview from "./workPreview";
@@ -19,7 +19,7 @@ export default function Home() {
   const { toast } = useToast();
   const router = useRouter();
 
-  const { saveUserBookmark, isLoading } = useSaveUserBookmark();
+  const { saveUserBookmark } = useSaveUserBookmark();
 
   const [work, setWork] = useState<WorkInfo | null>(null);
   const [latestChapter, setLatestChapter] = useState<number>(0);
@@ -31,6 +31,8 @@ export default function Home() {
 
   const handleSaveWork = async (bookmarkInformation: BookmarkForm) => {
     if (work) {
+      console.log("work", work);
+      console.log("bookmarkInformation", bookmarkInformation);
       const statusMessage = await saveWork(work);
       if (statusMessage === "success") {
         toast({

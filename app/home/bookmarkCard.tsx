@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { format } from "date-fns";
 
 import useDeleteBookmark from "@/hooks/useDeleteBookmark";
 import { useSaveUserBookmark } from "@/hooks/useSaveUserBookmark";
@@ -57,6 +58,8 @@ export default function WorkCard({
     favorite: bookmark.favorite,
     rating: bookmark.rating,
     comment: bookmark.comment,
+    startDateReading: bookmark.startDateReading,
+    endDateReading: bookmark.endDateReading,
   };
 
   const handleUpdateBookmark = async (bookmarkForm: BookmarkForm) => {
@@ -90,7 +93,6 @@ export default function WorkCard({
             <div>
               <p>{bookmark.workBasicInfo.author}</p>
               <p className="line-clamp-3">{bookmark.workBasicInfo.summary}</p>
-              <p>{bookmark.readingStatus}</p>
               <p>{bookmark.comment}</p>
               <EditBookmarkForm
                 latestChapter={

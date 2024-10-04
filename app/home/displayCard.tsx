@@ -46,6 +46,9 @@ export default function DisplayCard({ bookmark, onUpdate }: DisplayCardProps) {
       </CardContent>
       <CardFooter className="w-full flex flex-row p-0 pt-2 gap-10 justify-between">
         <SelectReadingStatus bookmark={bookmark} onUpdate={onUpdate} />
+        <span className="text-xs">
+          {bookmark.workDetails?.workStats.words?.toLocaleString()} words
+        </span>
         <div className="flex flex-row gap-1 h-6">
           <UpdateBookmark bookmark={bookmark} />
           <OpenWorkLink workID={bookmark.workID} />

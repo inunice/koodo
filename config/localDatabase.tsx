@@ -6,5 +6,5 @@ export const localDatabase = new Dexie("UserBookmarks") as Dexie & {
 };
 localDatabase.version(1).stores({
   userBookmarks:
-    "workID, userID, readingStatus, currentChapter, mainTags, otherTags, isDownloaded, favorite, rating, comment, workBasicInfo",
+    "workID, userID, readingStatus, currentChapter, mainTags, otherTags, isDownloaded, favorite, rating, comment, workBasicInfo, startDateReading, endDateReading",
 });

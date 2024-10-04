@@ -17,6 +17,8 @@ export interface BookmarkForm {
   favorite: boolean;
   rating: number;
   comment: string;
+  startDateReading: Date | null;
+  endDateReading: Date | null;
 }
 export interface UserBookmark extends BookmarkForm {
   userID: number;

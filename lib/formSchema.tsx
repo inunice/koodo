@@ -19,4 +19,6 @@ export const formSchema = z.object({
     .string()
     .max(200, { message: "Comment must be 200 characters or less." })
     .optional(),
+  startDateReading: z.date().nullable(),
+  endDateReading: z.date().nullable(),
 });

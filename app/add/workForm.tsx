@@ -18,6 +18,7 @@ import MainTagsField from "@/components/userBookmarkForm/mainTagsField";
 import OtherTagsField from "@/components/userBookmarkForm/otherTagsField";
 import RatingField from "@/components/userBookmarkForm/ratingField";
 import ReadingStatusField from "@/components/userBookmarkForm/readingStatusField";
+import ReadingDateField from "@/components/userBookmarkForm/readingDateField";
 
 interface WorkFormProps {
   latestChapter: number;
@@ -36,6 +37,8 @@ export default function WorkForm({ latestChapter, onSubmit }: WorkFormProps) {
       favorite: false,
       rating: 0,
       comment: "",
+      startDateReading: null,
+      endDateReading: null,
     },
   });
 
@@ -51,6 +54,7 @@ export default function WorkForm({ latestChapter, onSubmit }: WorkFormProps) {
           <IsDownloadedField control={form.control} />
           <FavoriteField control={form.control} />
           <CommentField control={form.control} />
+          <ReadingDateField control={form.control} />
           <Button>Add work</Button>
         </form>
       </Form>

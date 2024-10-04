@@ -18,6 +18,7 @@ import MainTagsField from "@/components/userBookmarkForm/mainTagsField";
 import OtherTagsField from "@/components/userBookmarkForm/otherTagsField";
 import RatingField from "@/components/userBookmarkForm/ratingField";
 import ReadingStatusField from "@/components/userBookmarkForm/readingStatusField";
+import ReadingDateField from "@/components/userBookmarkForm/readingDateField";
 
 interface EditBookmarkFormProps {
   latestChapter: number;
@@ -62,6 +63,7 @@ export default function EditBookmarkForm({
           <OtherTagsField control={form.control} />
           <IsDownloadedField control={form.control} />
           <CommentField control={form.control} />
+          <ReadingDateField control={form.control} />
           <Button>Update</Button>
         </form>
       </Form>
