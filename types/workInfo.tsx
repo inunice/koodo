@@ -14,6 +14,7 @@ export interface WorkBasicInfo {
   title: string;
   author: string[];
   summary: string[];
+  fandoms: string[];
 }
 
 export type WorkRating =
@@ -39,7 +40,6 @@ export interface WorkTags {
   rating: WorkRating;
   archiveWarnings: ArchiveWarning[];
   categories: Category[];
-  fandoms: string[];
   relationships: string[];
   characters: string[];
   additionalTags: string[];

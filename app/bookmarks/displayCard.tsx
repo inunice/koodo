@@ -38,7 +38,7 @@ export default function DisplayCard({ bookmark, onUpdate }: DisplayCardProps) {
       <CardContent className="flex flex-col gap-1 w-full p-0">
         <DisplayBadges
           mainTags={bookmark.mainTags}
-          fandoms={bookmark.workDetails?.workTags.fandoms}
+          fandoms={bookmark.workBasicInfo.fandoms}
         />
         <p className="text-xs text-justify line-clamp-4 text-gray-500">
           {bookmark.workBasicInfo.summary.join(" ")}

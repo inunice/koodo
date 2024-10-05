@@ -13,12 +13,12 @@ export default function WorkCard({ work }: WorkCardProps) {
       <h2>{work.workBasicInfo.title}</h2>
       <p>Author: {work.workBasicInfo.author}</p>
       <p>Summary: {work.workBasicInfo.summary}</p>
+      <p>Fandoms: {work.workBasicInfo.fandoms}</p>
       <p>Work ID: {work.workID}</p>
       <p>Work Link: {work.workLink}</p>
       <p>Rating: {work.workTags.rating}</p>
       <p>Archive Warnings: {work.workTags.archiveWarnings.join(", ")}</p>
       <p>Categories: {work.workTags.categories.join(", ")}</p>
-      <p>Fandoms: {work.workTags.fandoms.join(", ")}</p>
       <p>Relationships: {work.workTags.relationships.join(", ")}</p>
       <p>Characters: {work.workTags.characters.join(", ")}</p>
       <p>Additional Tags: {work.workTags.additionalTags.join(", ")}</p>

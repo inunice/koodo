@@ -11,6 +11,7 @@ const flattenBookmarkData = (data: Bookmark[]) => {
       item.workDetails?.workLink ||
       "https://archiveofourown.org/works/" + item.workID,
     workAuthor: item.workBasicInfo.author.join(","),
+    fandoms: item.workBasicInfo.fandoms.join(","),
     readingStatus: item.readingStatus,
     currentChapter: item.currentChapter,
     mainTags: item.mainTags.join(","),

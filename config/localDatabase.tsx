@@ -4,7 +4,7 @@ import { UserBookmark } from "@/types/bookmarkInfo";
 export const DATABASE_NAME = "Koodo";
 export const USER_BOOKMARKS_TABLE = "userBookmarks";
 export const USER_BOOKMARKS_SCHEMA =
-  "workID,userID,readingStatus,currentChapter,mainTags,otherTags,isDownloaded,favorite,rating,comment,workBasicInfo,startDateReading,endDateReading";
+  "workID,userID,readingStatus,currentChapter,fandoms,mainTags,otherTags,isDownloaded,favorite,rating,comment,workBasicInfo,startDateReading,endDateReading";
 
 export const localDatabase = new Dexie(DATABASE_NAME) as Dexie & {
   userBookmarks: EntityTable<UserBookmark, "workID">;

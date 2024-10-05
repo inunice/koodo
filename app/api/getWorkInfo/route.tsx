@@ -42,6 +42,7 @@ export async function GET(req: NextRequest) {
       title: $("h2.title").text().trim(),
       author: getTextArray($, 'a[rel="author"]'),
       summary: getTextArray($, "div.preface div.summary p:not(.chapter p)"),
+      fandoms: getTextArray($, "dd.fandom ul li"),
     };
 
     console.log(workInfo.workBasicInfo);
@@ -49,7 +50,6 @@ export async function GET(req: NextRequest) {
       rating: $("dd.rating").text().trim(),
       archiveWarnings: getTextArray($, "dd.warning ul li"),
       categories: getTextArray($, "dd.category ul li"),
-      fandoms: getTextArray($, "dd.fandom ul li"),
       relationships: getTextArray($, "dd.relationship ul li"),
       characters: getTextArray($, "dd.character ul li"),
       additionalTags: getTextArray($, "dd.freeform ul li"),
