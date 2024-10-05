@@ -7,7 +7,7 @@ import SearchBar from "./components/searchBar";
 import BookmarkCard from "./bookmarkCard";
 
 export default function BookmarksPage() {
-  const { bookmarks, updateBookmark } = useBookmarks();
+  const { bookmarks } = useBookmarks();
   const [query, setQuery] = useState("");
   const [filteredBookmarks, setFilteredBookmarks] = useState<Bookmark[]>([]);
 

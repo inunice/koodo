@@ -1,126 +1,77 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-import { useBookmarks } from "@/context/bookmarkContext";
-
-import { useToast } from "@/hooks/use-toast";
-import { useSaveUserBookmark } from "@/hooks/useSaveUserBookmark";
-
-import { Bookmark, BookmarkForm } from "@/types/bookmarkInfo";
+import { Bookmark } from "@/types/bookmarkInfo";
 
 import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 
-import CardInfo from "./cardInfo";
-import EditBookmarkForm from "./editBookmarkForm";
+import DisplayBadges from "./displayBadges";
+import UpdateBookmark from "./cardButtons/updateBookmark";
+import OpenWorkLink from "./cardButtons/openWorkLink";
+import SelectReadingStatus from "./cardButtons/selectReadingStatus";
 
-import { TOAST_MESSAGE_UPDATE } from "@/utils/toastMessages";
+import { HeartFilled } from "@/assets/icon/heart";
 
 interface BookmarkCardProps {
   bookmark: Bookmark;
 }
 
-export default function WorkCard({ bookmark }: BookmarkCardProps) {
-  const { toast } = useToast();
-  const { deleteBookmark, isDeleting, updateBookmark } = useBookmarks();
+export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
+  const router = useRouter();
 
-  const { saveUserBookmark, isLoading } = useSaveUserBookmark();
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleOpenDialog = () => {
-    setIsOpen(true);
-  };
-
-  const bookmarkForm: BookmarkForm = {
-    readingStatus: bookmark.readingStatus,
-    currentChapter: bookmark.currentChapter,
-    mainTags: bookmark.mainTags,
-    otherTags: bookmark.otherTags,
-    isDownloaded: bookmark.isDownloaded,
-    favorite: bookmark.favorite,
-    rating: bookmark.rating,
-    comment: bookmark.comment,
-    startDateReading: bookmark.startDateReading,
-    endDateReading: bookmark.endDateReading,
-  };
-
-  const handleUpdateBookmark = async (bookmarkForm: BookmarkForm) => {
-    try {
-      const updatedBookmark = await saveUserBookmark({
-        userID: 1,
-        workID: bookmark.workID,
-        workBasicInfo: bookmark.workBasicInfo,
-        bookmark: bookmarkForm,
-        addDate: bookmark.addDate,
-        updateDate: new Date(),
-      });
-      console.log("Bookmark updated successfully");
-      const status = updateBookmark({ ...bookmark, ...updatedBookmark });
-
-      if (status) {
-        toast(TOAST_MESSAGE_UPDATE.SUCCESS);
-      } else {
-        toast(TOAST_MESSAGE_UPDATE.ERROR);
-      }
-
-      setIsOpen(false);
-    } catch (error) {
-      console.error("Failed to update bookmark:", error);
-    }
-  };
-
-  const handleDeleteBookmark = async () => {
-    const status = await deleteBookmark(bookmark.workID);
-    if (status) {
-      toast({
-        title: "Yay!",
-        description: "Bookmark deleted successfully!",
-      });
-    } else {
-      toast({
-        title: "Uh oh!",
-        description: "Error deleting bookmark!",
-      });
-    }
+  const handleNavigate = () => {
+    router.push(`/bookmarks/${bookmark.workID}`);
   };
 
   return (
     <>
-      <div onClick={handleOpenDialog}>
-        <CardInfo bookmark={bookmark} />
-      </div>
-
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent>
-          <DialogTitle>{bookmark.workBasicInfo.title}</DialogTitle>
-          <DialogDescription asChild>
-            <div>
-              <p>{bookmark.workBasicInfo.author}</p>
-              <p className="line-clamp-3">{bookmark.workBasicInfo.summary}</p>
-              <p>{bookmark.comment}</p>
-              <EditBookmarkForm
-                latestChapter={
-                  bookmark.workDetails?.workStats.latestChapter || 0
-                }
-                initialValues={bookmarkForm}
-                onSubmit={handleUpdateBookmark}
-              />
+      <div onClick={handleNavigate}>
+        <Card className="w-full flex flex-col items-start px-6 py-6 gap-2 align-left">
+          <CardHeader className="p-0">
+            <div className="items-baseline flex flex-wrap gap-1">
+              {bookmark.favorite && <HeartFilled className="w-3 h-3" />}
+              <span className="text-md pr-1 font-bold leading-3">
+                {bookmark.workBasicInfo.title}
+              </span>
+              <span className="text-sm text-gray-700 leading-3">
+                {bookmark.workBasicInfo.author.join(" ")}
+              </span>
             </div>
-          </DialogDescription>
-          <DialogFooter>
-            <Button onClick={handleDeleteBookmark} disabled={isDeleting}>
-              {isDeleting ? "Deleting..." : "Delete"}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-1 w-full p-0">
+            <DisplayBadges
+              main={bookmark.mainTags}
+              other={bookmark.workBasicInfo.fandoms}
+            />
+            <DisplayBadges
+              main={bookmark.otherTags}
+              other={bookmark.workDetails?.workTags.additionalTags}
+            />
+            <p className="text-xs text-justify line-clamp-4 text-gray-500">
+              {bookmark.workBasicInfo.summary.join(" ")}
+            </p>
+          </CardContent>
+          <CardFooter className="w-full flex flex-row p-0 pt-2 gap-10 justify-between">
+            <SelectReadingStatus bookmark={bookmark} />
+            <div className="flex flex-row text-xs leading-3 gap-3">
+              <span>
+                {bookmark.workDetails?.workStats.words?.toLocaleString()} words
+              </span>
+              <span>{bookmark.rating}/5 stars</span>
+            </div>
+            <div className="flex flex-row gap-1 h-6">
+              <UpdateBookmark bookmark={bookmark} />
+              <OpenWorkLink workID={bookmark.workID} />
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
     </>
   );
 }

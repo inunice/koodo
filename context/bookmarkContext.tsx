@@ -16,6 +16,7 @@ interface BookmarksContextProps {
   deleteBookmark: (bookmarkId: number) => Promise<boolean>;
   isDeleting: boolean;
   updateBookmark: (updatedBookmark: Bookmark) => boolean;
+  getBookmarkByID: (bookmarkID: number) => Bookmark | undefined;
 }
 
 const BookmarksContext = createContext<BookmarksContextProps | undefined>(
@@ -92,6 +93,10 @@ export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({
     return true;
   };
 
+  const getBookmarkByID = (bookmarkId: number) => {
+    return bookmarks.find((bookmark) => bookmark.workID === bookmarkId);
+  };
+
   return (
     <BookmarksContext.Provider
       value={{
@@ -100,6 +105,7 @@ export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({
         deleteBookmark,
         isDeleting,
         updateBookmark,
+        getBookmarkByID,
       }}
     >
       {children}
