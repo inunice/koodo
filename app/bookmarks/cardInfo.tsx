@@ -16,12 +16,12 @@ import SelectReadingStatus from "./cardButtons/selectReadingStatus";
 
 import { HeartFilled } from "@/assets/icon/heart";
 
-interface DisplayCardProps {
+interface CardInfoProps {
   bookmark: Bookmark;
   onUpdate: (updatedBookmark: Bookmark) => void;
 }
 
-export default function DisplayCard({ bookmark, onUpdate }: DisplayCardProps) {
+export default function CardInfo({ bookmark, onUpdate }: CardInfoProps) {
   return (
     <Card className="w-full flex flex-col items-start px-6 py-6 gap-2 align-left">
       <CardHeader className="p-0">
@@ -37,8 +37,12 @@ export default function DisplayCard({ bookmark, onUpdate }: DisplayCardProps) {
       </CardHeader>
       <CardContent className="flex flex-col gap-1 w-full p-0">
         <DisplayBadges
-          mainTags={bookmark.mainTags}
-          fandoms={bookmark.workBasicInfo.fandoms}
+          main={bookmark.mainTags}
+          other={bookmark.workBasicInfo.fandoms}
+        />
+        <DisplayBadges
+          main={bookmark.otherTags}
+          other={bookmark.workDetails?.workTags.additionalTags}
         />
         <p className="text-xs text-justify line-clamp-4 text-gray-500">
           {bookmark.workBasicInfo.summary.join(" ")}
@@ -46,9 +50,12 @@ export default function DisplayCard({ bookmark, onUpdate }: DisplayCardProps) {
       </CardContent>
       <CardFooter className="w-full flex flex-row p-0 pt-2 gap-10 justify-between">
         <SelectReadingStatus bookmark={bookmark} onUpdate={onUpdate} />
-        <span className="text-xs">
-          {bookmark.workDetails?.workStats.words?.toLocaleString()} words
-        </span>
+        <div className="flex flex-row text-xs leading-3 gap-3">
+          <span>
+            {bookmark.workDetails?.workStats.words?.toLocaleString()} words
+          </span>
+          <span>{bookmark.rating}/5 stars</span>
+        </div>
         <div className="flex flex-row gap-1 h-6">
           <UpdateBookmark bookmark={bookmark} />
           <OpenWorkLink workID={bookmark.workID} />

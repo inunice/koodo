@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { format } from "date-fns";
 
 import useDeleteBookmark from "@/hooks/useDeleteBookmark";
 import { useSaveUserBookmark } from "@/hooks/useSaveUserBookmark";
@@ -17,7 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
-import DisplayCard from "./displayCard";
+import CardInfo from "./cardInfo";
 import EditBookmarkForm from "./editBookmarkForm";
 
 interface BookmarkCardProps {
@@ -83,7 +82,7 @@ export default function WorkCard({
   return (
     <>
       <div onClick={handleOpenDialog}>
-        <DisplayCard bookmark={bookmark} onUpdate={onUpdate} />
+        <CardInfo bookmark={bookmark} onUpdate={onUpdate} />
       </div>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>

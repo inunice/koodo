@@ -17,7 +17,7 @@ export const formSchema = z.object({
     .multipleOf(0.5, { message: "Ratings must be in half point increments." }),
   comment: z
     .string()
-    .max(200, { message: "Comment must be 200 characters or less." })
+    .max(280, { message: "Comment must be 280 characters or less." })
     .optional(),
   startDateReading: z.date().nullable(),
   endDateReading: z.date().nullable(),

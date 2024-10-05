@@ -28,7 +28,7 @@ export default function BookmarksPage() {
 
   return (
     <div>
-      <span>Home</span>
+      <h1>Bookmarks</h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 px-3">
         {bookmarks.map((bookmark, index) => (
           <BookmarkCard

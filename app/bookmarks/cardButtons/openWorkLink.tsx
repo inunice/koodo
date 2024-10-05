@@ -19,7 +19,7 @@ export default function OpenWorkLink({ workID }: OpenWorkLinkProps) {
       <Tooltip>
         <TooltipTrigger asChild>
           <Link href={"https://archiveofourown.org/works/" + workID}>
-            <LinkIcon color="#999999" />
+            <LinkIcon className="w-5 h-5" />
           </Link>
         </TooltipTrigger>
         <TooltipContent>

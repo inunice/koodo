@@ -24,7 +24,7 @@ export default function UpdateBookmark({ bookmark }: UpdateBookmarkProps) {
   const { getWorkInformation } = useWorkInfo();
 
   const handleGetWorkInfo = async (event: React.MouseEvent) => {
-    event.stopPropagation(); // Prevent the click event from propagating to the card
+    event.stopPropagation();
 
     const work = await getWorkInformation(
       "https://archiveofourown.org/works/" + bookmark.workID

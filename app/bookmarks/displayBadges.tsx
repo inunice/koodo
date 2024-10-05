@@ -2,25 +2,22 @@ import { Badge } from "@/components/ui/badge";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 interface DisplayBadgesProps {
-  mainTags: string[];
-  fandoms: string[] | undefined;
+  main: string[];
+  other: string[] | undefined;
 }
 
-export default function DisplayBadges({
-  mainTags,
-  fandoms,
-}: DisplayBadgesProps) {
+export default function DisplayBadges({ main, other }: DisplayBadgesProps) {
   return (
     <ScrollArea className="w-full whitespace-nowrap overflow-y-auto">
       <div className="w-max flex gap-1">
-        {mainTags.map((mainTag, index) => (
+        {main.map((main, index) => (
           <Badge key={index} className="text-[10px]">
-            {mainTag}
+            {main}
           </Badge>
         ))}
-        {fandoms?.map((fandom, index) => (
+        {other?.map((other, index) => (
           <Badge key={index} variant="outline" className="text-[10px]">
-            {fandom}
+            {other}
           </Badge>
         ))}
       </div>

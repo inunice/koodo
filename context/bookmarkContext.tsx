@@ -50,10 +50,15 @@ export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({
     if (!fetchedWorks) return [];
 
     const workMap = new Map(fetchedWorks.map((work) => [work.workID, work]));
-    return userBookmarkData.map((userBookmark) => ({
+    const bookmarkList = userBookmarkData.map((userBookmark) => ({
       ...userBookmark,
       workDetails: workMap.get(userBookmark.workID),
     }));
+
+    return bookmarkList.sort(
+      (a, b) =>
+        new Date(b.updateDate).getTime() - new Date(a.updateDate).getTime()
+    );
   };
 
   return (
