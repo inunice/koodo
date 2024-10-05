@@ -1,10 +1,15 @@
 import { Dexie, type EntityTable } from "dexie";
 import { UserBookmark } from "@/types/bookmarkInfo";
 
-export const localDatabase = new Dexie("UserBookmarks") as Dexie & {
+export const DATABASE_NAME = "Koodo";
+export const USER_BOOKMARKS_TABLE = "userBookmarks";
+export const USER_BOOKMARKS_SCHEMA =
+  "workID,userID,readingStatus,currentChapter,mainTags,otherTags,isDownloaded,favorite,rating,comment,workBasicInfo,startDateReading,endDateReading";
+
+export const localDatabase = new Dexie(DATABASE_NAME) as Dexie & {
   userBookmarks: EntityTable<UserBookmark, "workID">;
 };
+
 localDatabase.version(1).stores({
-  userBookmarks:
-    "workID, userID, readingStatus, currentChapter, mainTags, otherTags, isDownloaded, favorite, rating, comment, workBasicInfo, startDateReading, endDateReading",
+  [USER_BOOKMARKS_TABLE]: USER_BOOKMARKS_SCHEMA,
 });
