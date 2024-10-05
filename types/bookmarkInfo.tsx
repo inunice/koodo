@@ -31,3 +31,23 @@ export interface UserBookmark extends BookmarkForm {
 export interface Bookmark extends UserBookmark {
   workDetails: Omit<WorkInfo, "workBasicInfo"> | undefined;
 }
+
+export interface BookmarkCSV {
+  workTitle: string;
+  workLink: string;
+  workAuthor: string;
+  readingStatus: ReadingStatus;
+  currentChapter: number;
+  mainTags: string;
+  otherTags: string;
+  words: number | undefined;
+  workStatus: string | undefined;
+  workType: string | undefined;
+  isDownloaded: boolean;
+  favorite: boolean;
+  rating: number;
+  comment: string;
+  startDateReading: string | undefined;
+  endDateReading: string | undefined;
+  workSummary: string;
+}
