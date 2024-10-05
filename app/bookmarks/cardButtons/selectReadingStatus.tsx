@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from "react";
 
-import { addBookmark } from "@/app/api/addBookmark";
+import { useBookmarks } from "@/context/bookmarkContext";
+import { updateBookmarkReadingStatus } from "../utils/updateBookmarkReadingStatus";
 
 import { Bookmark, ReadingStatus, readingStatus } from "@/types/bookmarkInfo";
 
+import { useToast } from "@/hooks/use-toast";
 import {
   Select,
   SelectContent,
@@ -16,13 +18,14 @@ import {
 
 interface SelectReadingStatusProps {
   bookmark: Bookmark;
-  onUpdate: (updatedBookmark: Bookmark) => void;
 }
 
 export default function SelectReadingStatus({
   bookmark,
-  onUpdate,
 }: SelectReadingStatusProps) {
+  const { toast } = useToast();
+
+  const { updateBookmark } = useBookmarks();
   const [currentReadingStatus, setCurrentReadingStatus] = useState(
     bookmark.readingStatus
   );
@@ -30,9 +33,20 @@ export default function SelectReadingStatus({
   const handleStatusChange = (newReadingStatus: ReadingStatus) => {
     const updatedBookmark = { ...bookmark, readingStatus: newReadingStatus };
     setCurrentReadingStatus(newReadingStatus);
-    addBookmark(bookmark.workID, newReadingStatus);
+    updateBookmarkReadingStatus(bookmark.workID, newReadingStatus);
 
-    onUpdate(updatedBookmark);
+    const status = updateBookmark(updatedBookmark);
+    if (status) {
+      toast({
+        title: "Yay!",
+        description: "Bookmark updated successfully!",
+      });
+    } else {
+      toast({
+        title: "Uh oh!",
+        description: "Error updating bookmark!",
+      });
+    }
   };
 
   useEffect(() => {

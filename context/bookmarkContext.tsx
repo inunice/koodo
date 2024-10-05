@@ -13,9 +13,9 @@ import { WorkDetails } from "@/types/workInfo";
 interface BookmarksContextProps {
   bookmarks: Bookmark[];
   setBookmarks: React.Dispatch<React.SetStateAction<Bookmark[]>>;
-  deleteBookmark: (bookmarkId: number) => boolean;
+  deleteBookmark: (bookmarkId: number) => Promise<boolean>;
   isDeleting: boolean;
-  updateBookmark: (updatedBookmark: Bookmark) => void;
+  updateBookmark: (updatedBookmark: Bookmark) => boolean;
 }
 
 const BookmarksContext = createContext<BookmarksContextProps | undefined>(
@@ -76,10 +76,10 @@ export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({
       setBookmarks((prevBookmarks) =>
         prevBookmarks.filter((bookmark) => bookmark.workID !== bookmarkId)
       );
-      return { status: "success" };
+      return true;
     } else {
       console.error("Failed to delete bookmark:", message);
-      return { status: "error" };
+      return false;
     }
   };
 
@@ -89,6 +89,7 @@ export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({
         bookmark.workID === updatedBookmark.workID ? updatedBookmark : bookmark
       )
     );
+    return true;
   };
 
   return (

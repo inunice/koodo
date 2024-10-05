@@ -49,7 +49,7 @@ export default function CardInfo({ bookmark, onUpdate }: CardInfoProps) {
         </p>
       </CardContent>
       <CardFooter className="w-full flex flex-row p-0 pt-2 gap-10 justify-between">
-        <SelectReadingStatus bookmark={bookmark} onUpdate={onUpdate} />
+        <SelectReadingStatus bookmark={bookmark} />
         <div className="flex flex-row text-xs leading-3 gap-3">
           <span>
             {bookmark.workDetails?.workStats.words?.toLocaleString()} words

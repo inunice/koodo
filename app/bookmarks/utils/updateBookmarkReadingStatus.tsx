@@ -1,7 +1,7 @@
 import { localDatabase } from "@/config/localDatabase";
 import { ReadingStatus } from "@/types/bookmarkInfo";
 
-export async function addBookmark(
+export async function updateBookmarkReadingStatus(
   workID: number,
   readingStatus: ReadingStatus
 ): Promise<boolean> {
