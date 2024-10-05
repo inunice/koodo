@@ -3,6 +3,8 @@ import { DM_Sans } from "next/font/google";
 
 import { Toaster } from "@/components/ui/toaster";
 
+import NavigationBar from "@/components/navigationBar/navigationBar";
+
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -24,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSans.variable} font-sans lg:mx-[250px]`}>
       <body>
+        <NavigationBar />
         <main>{children}</main>
         <Toaster />
       </body>

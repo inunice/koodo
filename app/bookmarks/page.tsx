@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 
 import { BookmarkAddIcon } from "@/assets/icon/bookmark";
 
-export default function Home() {
+export default function BookmarksPage() {
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
 
   useEffect(() => {
