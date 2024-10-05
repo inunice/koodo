@@ -21,14 +21,15 @@ import { Button } from "@/components/ui/button";
 import CardInfo from "./cardInfo";
 import EditBookmarkForm from "./editBookmarkForm";
 
+import { TOAST_MESSAGE_UPDATE } from "@/utils/toastMessages";
+
 interface BookmarkCardProps {
   bookmark: Bookmark;
-  onUpdate: (updatedBookmark: Bookmark) => void;
 }
 
-export default function WorkCard({ bookmark, onUpdate }: BookmarkCardProps) {
+export default function WorkCard({ bookmark }: BookmarkCardProps) {
   const { toast } = useToast();
-  const { deleteBookmark, isDeleting } = useBookmarks();
+  const { deleteBookmark, isDeleting, updateBookmark } = useBookmarks();
 
   const { saveUserBookmark, isLoading } = useSaveUserBookmark();
   const [isOpen, setIsOpen] = useState(false);
@@ -61,7 +62,14 @@ export default function WorkCard({ bookmark, onUpdate }: BookmarkCardProps) {
         updateDate: new Date(),
       });
       console.log("Bookmark updated successfully");
-      onUpdate({ ...bookmark, ...updatedBookmark });
+      const status = updateBookmark({ ...bookmark, ...updatedBookmark });
+
+      if (status) {
+        toast(TOAST_MESSAGE_UPDATE.SUCCESS);
+      } else {
+        toast(TOAST_MESSAGE_UPDATE.ERROR);
+      }
+
       setIsOpen(false);
     } catch (error) {
       console.error("Failed to update bookmark:", error);
@@ -86,7 +94,7 @@ export default function WorkCard({ bookmark, onUpdate }: BookmarkCardProps) {
   return (
     <>
       <div onClick={handleOpenDialog}>
-        <CardInfo bookmark={bookmark} onUpdate={onUpdate} />
+        <CardInfo bookmark={bookmark} />
       </div>
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>

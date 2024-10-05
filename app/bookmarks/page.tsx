@@ -26,11 +26,7 @@ export default function BookmarksPage() {
       />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 px-3">
         {filteredBookmarks.map((bookmark, index) => (
-          <BookmarkCard
-            key={index}
-            bookmark={bookmark}
-            onUpdate={updateBookmark}
-          />
+          <BookmarkCard key={index} bookmark={bookmark} />
         ))}
       </div>
     </div>

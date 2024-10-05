@@ -18,10 +18,9 @@ import { HeartFilled } from "@/assets/icon/heart";
 
 interface CardInfoProps {
   bookmark: Bookmark;
-  onUpdate: (updatedBookmark: Bookmark) => void;
 }
 
-export default function CardInfo({ bookmark, onUpdate }: CardInfoProps) {
+export default function CardInfo({ bookmark }: CardInfoProps) {
   return (
     <Card className="w-full flex flex-col items-start px-6 py-6 gap-2 align-left">
       <CardHeader className="p-0">

@@ -16,6 +16,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+import { TOAST_MESSAGE_UPDATE } from "@/utils/toastMessages";
+
 interface SelectReadingStatusProps {
   bookmark: Bookmark;
 }
@@ -37,15 +39,9 @@ export default function SelectReadingStatus({
 
     const status = updateBookmark(updatedBookmark);
     if (status) {
-      toast({
-        title: "Yay!",
-        description: "Bookmark updated successfully!",
-      });
+      toast(TOAST_MESSAGE_UPDATE.SUCCESS);
     } else {
-      toast({
-        title: "Uh oh!",
-        description: "Error updating bookmark!",
-      });
+      toast(TOAST_MESSAGE_UPDATE.ERROR);
     }
   };
 
