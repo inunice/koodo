@@ -4,10 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { useToast } from "@/hooks/use-toast";
-
 import { saveWork } from "@/app/api/saveWork";
 import { useSaveUserBookmark } from "@/hooks/useSaveUserBookmark";
-
 import { WorkInfo } from "@/types/workInfo";
 import { BookmarkForm } from "@/types/bookmarkInfo";
 
@@ -18,7 +16,6 @@ import WorkForm from "./workForm";
 export default function Home() {
   const { toast } = useToast();
   const router = useRouter();
-
   const { saveUserBookmark } = useSaveUserBookmark();
 
   const [work, setWork] = useState<WorkInfo | null>(null);
@@ -40,16 +37,17 @@ export default function Home() {
           description: "Bookmark added successfully!",
         });
 
-        await saveUserBookmark({
+        const newUserBookmark = {
           userID: 1,
           workID: work.workID,
           workBasicInfo: work.workBasicInfo,
           bookmark: bookmarkInformation,
           addDate: new Date(),
           updateDate: new Date(),
-        });
+        };
 
-        router.push("/home");
+        await saveUserBookmark(newUserBookmark);
+        router.push("/bookmarks");
       } else {
         toast({
           title: "Uh oh!",

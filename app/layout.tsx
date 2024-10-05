@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 
+import { BookmarksProvider } from "@/context/bookmarkContext";
+
 import { Toaster } from "@/components/ui/toaster";
 
 import NavigationBar from "@/components/navigationBar/navigationBar";
@@ -24,12 +26,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} font-sans lg:mx-[250px]`}>
-      <body>
-        <NavigationBar />
-        <main>{children}</main>
-        <Toaster />
-      </body>
-    </html>
+    <BookmarksProvider>
+      <html lang="en" className={`${dmSans.variable} font-sans lg:mx-[250px]`}>
+        <body>
+          <NavigationBar />
+          <main>{children}</main>
+          <Toaster />
+        </body>
+      </html>
+    </BookmarksProvider>
   );
 }
