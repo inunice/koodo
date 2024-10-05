@@ -8,7 +8,8 @@ import { Bookmark, BookmarkForm } from "@/types/bookmarkInfo";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 
-import EditBookmarkForm from "./editBookmarkForm";
+import EditBookmarkForm from "./components/editBookmarkForm";
+import WorkInfo from "./components/workInfo";
 
 import { TOAST_MESSAGE_UPDATE } from "@/utils/toastMessages";
 
@@ -78,17 +79,12 @@ export default function BookmarkInfo({ bookmark }: BookmarkInfoProps) {
 
   return (
     <div>
-      <h1>{bookmark.workBasicInfo.title}</h1>
-      <div>
-        <p>{bookmark.workBasicInfo.author}</p>
-        <p className="line-clamp-3">{bookmark.workBasicInfo.summary}</p>
-        <p>{bookmark.comment}</p>
-        <EditBookmarkForm
-          latestChapter={bookmark.workDetails?.workStats.latestChapter || 0}
-          initialValues={bookmarkForm}
-          onSubmit={handleUpdateBookmark}
-        />
-      </div>
+      <WorkInfo bookmark={bookmark} />
+      <EditBookmarkForm
+        latestChapter={bookmark.workDetails?.workStats.latestChapter || 0}
+        initialValues={bookmarkForm}
+        onSubmit={handleUpdateBookmark}
+      />
       <Button onClick={handleDeleteBookmark} disabled={isDeleting}>
         {isDeleting ? "Deleting..." : "Delete"}
       </Button>

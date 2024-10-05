@@ -5,7 +5,7 @@ import { useBookmarks } from "@/context/bookmarkContext";
 
 import { Bookmark } from "@/types/bookmarkInfo";
 
-import BookmarkInfo from "./components/bookmarkInfo";
+import BookmarkInfo from "./bookmarkInfo";
 
 export default function BookmarkPage({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -21,7 +21,6 @@ export default function BookmarkPage({ params }: { params: { id: string } }) {
 
   return (
     <div>
-      <h1>BookmarkPage</h1>
       {bookmark === null ? (
         <span>Loading...</span>
       ) : bookmark === undefined ? (
