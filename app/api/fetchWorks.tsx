@@ -24,12 +24,12 @@ export const fetchWorks = async (
         title: work.title,
         author: work.author,
         summary: work.summary,
+        fandoms: work.fandoms,
       },
       workTags: {
         rating: work.rating,
         archiveWarnings: work.archive_warnings,
         categories: work.categories,
-        fandoms: work.fandoms,
         relationships: work.relationships,
         characters: work.characters,
         additionalTags: work.additional_tags,
