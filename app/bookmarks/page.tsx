@@ -1,13 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useBookmarks } from "@/context/bookmarkContext";
 import BookmarkCard from "./bookmarkCard";
 
 import { Bookmark } from "@/types/bookmarkInfo";
-
-import { Button } from "@/components/ui/button";
-import { BookmarkAddIcon } from "@/assets/icon/bookmark";
 
 export default function BookmarksPage() {
   const { bookmarks, setBookmarks } = useBookmarks();
@@ -38,14 +34,6 @@ export default function BookmarksPage() {
             onUpdate={handleUpdateBookmark}
           />
         ))}
-
-        <div className="fixed bottom-5 right-5">
-          <Button asChild className="w-16 h-16">
-            <Link href="/add">
-              <BookmarkAddIcon className="w-full h-full" />
-            </Link>
-          </Button>
-        </div>
       </div>
     </div>
   );
