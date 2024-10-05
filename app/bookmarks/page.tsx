@@ -7,27 +7,13 @@ import SearchBar from "./components/searchBar";
 import BookmarkCard from "./bookmarkCard";
 
 export default function BookmarksPage() {
-  const { bookmarks, setBookmarks } = useBookmarks();
+  const { bookmarks, updateBookmark } = useBookmarks();
   const [query, setQuery] = useState("");
   const [filteredBookmarks, setFilteredBookmarks] = useState<Bookmark[]>([]);
 
   useEffect(() => {
     setFilteredBookmarks(bookmarks || []);
   }, [bookmarks]);
-
-  const handleDeleteBookmark = (bookmarkId: number) => {
-    setBookmarks((prevBookmarks) =>
-      prevBookmarks.filter((bookmark) => bookmark.workID !== bookmarkId)
-    );
-  };
-
-  const handleUpdateBookmark = (updatedBookmark: Bookmark) => {
-    setBookmarks((prevBookmarks) =>
-      prevBookmarks.map((bookmark) =>
-        bookmark.workID === updatedBookmark.workID ? updatedBookmark : bookmark
-      )
-    );
-  };
 
   return (
     <div>
@@ -43,8 +29,7 @@ export default function BookmarksPage() {
           <BookmarkCard
             key={index}
             bookmark={bookmark}
-            onDelete={handleDeleteBookmark}
-            onUpdate={handleUpdateBookmark}
+            onUpdate={updateBookmark}
           />
         ))}
       </div>

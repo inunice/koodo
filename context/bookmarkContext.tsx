@@ -1,14 +1,21 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
+
 import { fetchBookmarkData } from "@/app/api/fetchBookmarkData";
 import { fetchWorks } from "@/app/api/fetchWorks";
+
+import useDeleteBookmarkFromDB from "@/hooks/useDeleteBookmarkFromDB";
+
 import { Bookmark, UserBookmark } from "@/types/bookmarkInfo";
 import { WorkDetails } from "@/types/workInfo";
 
 interface BookmarksContextProps {
   bookmarks: Bookmark[];
   setBookmarks: React.Dispatch<React.SetStateAction<Bookmark[]>>;
+  deleteBookmark: (bookmarkId: number) => boolean;
+  isDeleting: boolean;
+  updateBookmark: (updatedBookmark: Bookmark) => void;
 }
 
 const BookmarksContext = createContext<BookmarksContextProps | undefined>(
@@ -18,6 +25,8 @@ const BookmarksContext = createContext<BookmarksContextProps | undefined>(
 export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const { deleteBookmarkFromDB, isDeleting } = useDeleteBookmarkFromDB();
+
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
 
   useEffect(() => {
@@ -61,8 +70,37 @@ export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({
     );
   };
 
+  const deleteBookmark = async (bookmarkId: number) => {
+    const { status, message } = await deleteBookmarkFromDB(bookmarkId);
+    if (status === "success") {
+      setBookmarks((prevBookmarks) =>
+        prevBookmarks.filter((bookmark) => bookmark.workID !== bookmarkId)
+      );
+      return { status: "success" };
+    } else {
+      console.error("Failed to delete bookmark:", message);
+      return { status: "error" };
+    }
+  };
+
+  const updateBookmark = (updatedBookmark: Bookmark) => {
+    setBookmarks((prevBookmarks) =>
+      prevBookmarks.map((bookmark) =>
+        bookmark.workID === updatedBookmark.workID ? updatedBookmark : bookmark
+      )
+    );
+  };
+
   return (
-    <BookmarksContext.Provider value={{ bookmarks, setBookmarks }}>
+    <BookmarksContext.Provider
+      value={{
+        bookmarks,
+        setBookmarks,
+        deleteBookmark,
+        isDeleting,
+        updateBookmark,
+      }}
+    >
       {children}
     </BookmarksContext.Provider>
   );

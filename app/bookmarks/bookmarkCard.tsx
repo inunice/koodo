@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 
-import useDeleteBookmark from "@/hooks/useDeleteBookmark";
+import { useBookmarks } from "@/context/bookmarkContext";
+
+import { useToast } from "@/hooks/use-toast";
 import { useSaveUserBookmark } from "@/hooks/useSaveUserBookmark";
 
 import { Bookmark, BookmarkForm } from "@/types/bookmarkInfo";
@@ -21,31 +23,18 @@ import EditBookmarkForm from "./editBookmarkForm";
 
 interface BookmarkCardProps {
   bookmark: Bookmark;
-  onDelete: (bookmarkId: number) => void;
   onUpdate: (updatedBookmark: Bookmark) => void;
 }
 
-export default function WorkCard({
-  bookmark,
-  onDelete,
-  onUpdate,
-}: BookmarkCardProps) {
+export default function WorkCard({ bookmark, onUpdate }: BookmarkCardProps) {
+  const { toast } = useToast();
+  const { deleteBookmark, isDeleting } = useBookmarks();
+
   const { saveUserBookmark, isLoading } = useSaveUserBookmark();
-  const { deleteBookmark, isDeleting } = useDeleteBookmark();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpenDialog = () => {
     setIsOpen(true);
-  };
-
-  const handleDeleteBookmark = async () => {
-    const { status, message } = await deleteBookmark(bookmark);
-    if (status === "success") {
-      setIsOpen(false);
-      onDelete(bookmark.workID);
-    } else {
-      console.error("Failed to delete bookmark:", message);
-    }
   };
 
   const bookmarkForm: BookmarkForm = {
@@ -79,6 +68,21 @@ export default function WorkCard({
     }
   };
 
+  const handleDeleteBookmark = async () => {
+    const status = await deleteBookmark(bookmark.workID);
+    if (status) {
+      toast({
+        title: "Yay!",
+        description: "Bookmark deleted successfully!",
+      });
+    } else {
+      toast({
+        title: "Uh oh!",
+        description: "Error deleting bookmark!",
+      });
+    }
+  };
+
   return (
     <>
       <div onClick={handleOpenDialog}>
@@ -105,7 +109,7 @@ export default function WorkCard({
           <DialogFooter>
             <Button onClick={handleDeleteBookmark} disabled={isDeleting}>
               {isDeleting ? "Deleting..." : "Delete"}
-            </Button>{" "}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
