@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useBookmarks } from "@/context/bookmarkContext";
 import { Bookmark } from "@/types/bookmarkInfo";
-import SearchBar from "./components/searchBar";
+import SearchBar from "./components/search-bar";
 import BookmarkCard from "./bookmarkCard";
 
 export default function BookmarksPage() {

@@ -5,7 +5,7 @@ import { Bookmark } from "@/types/bookmarkInfo";
 import { FilterType, FilterTypeDisplayNames } from "../types/filterType";
 
 import { Command, CommandInput, CommandList } from "@/components/ui/command";
-import SearchFilterDropdown from "./searchFilterDropdown";
+import SearchFilterDropdown from "./search-filter-dropdown";
 
 interface SearchBarProps {
   query: string;
@@ -22,6 +22,7 @@ export default function SearchBar({
 }: SearchBarProps) {
   const [filterTypes, setFilterTypes] = useState<FilterType[]>([
     "title",
+    "fandom",
     "mainTags",
   ]);
 

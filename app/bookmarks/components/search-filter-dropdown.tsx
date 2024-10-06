@@ -1,5 +1,7 @@
 "use client";
 
+import { FilterType, FilterTypeDisplayNames } from "../types/filterType";
+
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -10,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { FilterType, FilterTypeDisplayNames } from "../types/filterType";
+import { SettingsAdjustIcon } from "@/assets/icon/settings-adjust";
 
 interface FilterDropdownProps {
   filterTypes: FilterType[];
@@ -24,7 +26,9 @@ export default function SearchFilterDropdown({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">Filter search</Button>
+        <Button className="h-10 aspect-square p-3">
+          <SettingsAdjustIcon className="w-full h-full" />
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Search By</DropdownMenuLabel>
