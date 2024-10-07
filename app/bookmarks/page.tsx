@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/pagination";
 
 import SearchBar from "./components/search-bar";
+import FilterBy from "./components/filter-by";
 import BookmarkCard from "./bookmark-card";
 
 const ITEMS_PER_PAGE = 10;
@@ -54,6 +55,10 @@ export default function BookmarksPage() {
         query={query}
         setQuery={setQuery}
         filteredBookmarks={bookmarks || []}
+        setFilteredBookmarks={setFilteredBookmarks}
+      />
+      <FilterBy
+        bookmarks={bookmarks || []}
         setFilteredBookmarks={setFilteredBookmarks}
       />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 px-3">
