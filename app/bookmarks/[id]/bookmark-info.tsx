@@ -11,7 +11,10 @@ import { Button } from "@/components/ui/button";
 import EditBookmarkForm from "./components/editBookmarkForm";
 import WorkInfo from "./components/workInfo";
 
-import { TOAST_MESSAGE_UPDATE } from "@/utils/toastMessages";
+import {
+  TOAST_MESSAGE_UPDATE,
+  TOAST_MESSAGE_DELETE,
+} from "@/utils/toast-messages";
 
 interface BookmarkInfoProps {
   bookmark: Bookmark;
@@ -25,42 +28,32 @@ export default function BookmarkInfo({ bookmark }: BookmarkInfoProps) {
   const { saveUserBookmark, isLoading } = useSaveUserBookmark();
 
   const handleUpdateBookmark = async (bookmarkForm: BookmarkForm) => {
+    const updatedBookmark = await saveUserBookmark({
+      userID: 1,
+      workID: bookmark.workID,
+      workBasicInfo: bookmark.workBasicInfo,
+      bookmark: bookmarkForm,
+      addDate: bookmark.addDate,
+      updateDate: new Date(),
+    });
     try {
-      const updatedBookmark = await saveUserBookmark({
-        userID: 1,
-        workID: bookmark.workID,
-        workBasicInfo: bookmark.workBasicInfo,
-        bookmark: bookmarkForm,
-        addDate: bookmark.addDate,
-        updateDate: new Date(),
-      });
-      console.log("Bookmark updated successfully");
-      const status = updateBookmark({ ...bookmark, ...updatedBookmark });
-
-      if (status) {
-        toast(TOAST_MESSAGE_UPDATE.SUCCESS);
-        router.push("/bookmarks");
-      } else {
-        toast(TOAST_MESSAGE_UPDATE.ERROR);
-      }
+      updateBookmark({ ...bookmark, ...updatedBookmark });
+      toast(TOAST_MESSAGE_UPDATE.SUCCESS);
+      router.push("/bookmarks");
     } catch (error) {
+      toast(TOAST_MESSAGE_UPDATE.ERROR);
       console.error("Failed to update bookmark:", error);
     }
   };
 
   const handleDeleteBookmark = async () => {
-    const status = await deleteBookmark(bookmark.workID);
-    if (status) {
-      toast({
-        title: "Yay!",
-        description: "Bookmark deleted successfully!",
-      });
+    try {
+      await deleteBookmark(bookmark.workID);
+      toast(TOAST_MESSAGE_DELETE.SUCCESS);
       router.push("/bookmarks");
-    } else {
-      toast({
-        title: "Uh oh!",
-        description: "Error deleting bookmark!",
-      });
+    } catch (error) {
+      console.error("Failed to delete bookmark:", error);
+      toast(TOAST_MESSAGE_DELETE.ERROR);
     }
   };
 

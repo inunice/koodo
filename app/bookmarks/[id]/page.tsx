@@ -5,7 +5,7 @@ import { useBookmarks } from "@/context/bookmark-context";
 
 import { Bookmark } from "@/types/bookmarkInfo";
 
-import BookmarkInfo from "./bookmarkInfo";
+import BookmarkInfo from "./bookmark-info";
 
 export default function BookmarkPage({ params }: { params: { id: string } }) {
   const { id } = params;

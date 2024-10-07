@@ -16,7 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { TOAST_MESSAGE_UPDATE } from "@/utils/toastMessages";
+import { TOAST_MESSAGE_UPDATE } from "@/utils/toast-messages";
 
 interface SelectReadingStatusProps {
   bookmark: Bookmark;
