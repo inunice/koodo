@@ -11,12 +11,12 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 
-import DisplayBadges from "./displayBadges";
-import UpdateBookmark from "./cardButtons/updateBookmark";
-import OpenWorkLink from "./cardButtons/openWorkLink";
+import DisplayBadges from "./display-badges";
+import UpdateBookmark from "./card-buttons/update-bookmark";
+import OpenWorkLink from "./card-buttons/open-work-link";
 
 import { HeartFilled } from "@/assets/icon/heart";
-import ReadingStatus from "./cardButtons/reading-status";
+import ReadingStatus from "./card-buttons/reading-status";
 
 interface BookmarkCardProps {
   bookmark: Bookmark;

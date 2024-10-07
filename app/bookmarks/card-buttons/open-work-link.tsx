@@ -14,11 +14,20 @@ interface OpenWorkLinkProps {
 }
 
 export default function OpenWorkLink({ workID }: OpenWorkLinkProps) {
+  const handleClick = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+  };
+
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Link href={"https://archiveofourown.org/works/" + workID}>
+          <Link
+            href={"https://archiveofourown.org/works/" + workID}
+            onClick={handleClick}
+          >
             <LinkIcon className="w-5 h-5" />
           </Link>
         </TooltipTrigger>

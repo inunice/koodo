@@ -2,9 +2,11 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { Bookmark } from "@/types/bookmarkInfo";
-import { FilterType, FilterTypeDisplayNames } from "../types/filterType";
+import { FilterType, FilterTypeDisplayNames } from "../types/filter-type";
 
 import { Command, CommandInput, CommandList } from "@/components/ui/command";
+import { Button } from "@/components/ui/button";
+
 import SearchFilterDropdown from "./search-filter-dropdown";
 
 interface SearchBarProps {
@@ -25,6 +27,8 @@ export default function SearchBar({
     "fandom",
     "mainTags",
   ]);
+
+  const [searchTriggered, setSearchTriggered] = useState(false);
 
   const toggleFilterType = useCallback(
     (type: FilterType) => {
@@ -57,9 +61,22 @@ export default function SearchBar({
     });
   }, [query, filterTypes, filteredBookmarks]);
 
-  useEffect(() => {
+  const handleSearch = useCallback(() => {
     setFilteredBookmarks(filterBookmarks());
-  }, [query, filterTypes, filterBookmarks, setFilteredBookmarks]);
+    setSearchTriggered(false);
+  }, [filterBookmarks, setFilteredBookmarks]);
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  useEffect(() => {
+    if (searchTriggered) {
+      handleSearch();
+    }
+  }, [searchTriggered, handleSearch]);
 
   return (
     <div className="flex flex-row">
@@ -72,9 +89,11 @@ export default function SearchBar({
           }`}
           value={query}
           onValueChange={(value) => setQuery(value)}
+          onKeyDown={handleKeyDown}
         />
         <CommandList></CommandList>
       </Command>
+      <Button onClick={() => setSearchTriggered(true)}>Search</Button>
       <SearchFilterDropdown
         filterTypes={filterTypes}
         toggleFilterType={toggleFilterType}

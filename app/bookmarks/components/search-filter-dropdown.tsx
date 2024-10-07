@@ -1,6 +1,6 @@
 "use client";
 
-import { FilterType, FilterTypeDisplayNames } from "../types/filterType";
+import { FilterType, FilterTypeDisplayNames } from "../types/filter-type";
 
 import { Button } from "@/components/ui/button";
 import {
