@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 
 import { useBookmarks } from "@/context/bookmarkContext";
-import { updateBookmarkReadingStatus } from "../utils/updateBookmarkReadingStatus";
+import { updateBookmarkReadingStatus } from "../utils/update-bookmark-reading-status";
 
 import { Bookmark, ReadingStatus, readingStatus } from "@/types/bookmarkInfo";
 
@@ -50,17 +50,19 @@ export default function SelectReadingStatus({
   }, [bookmark]);
 
   return (
-    <Select onValueChange={handleStatusChange} value={currentReadingStatus}>
-      <SelectTrigger>
-        <SelectValue placeholder="Select status" />
-      </SelectTrigger>
-      <SelectContent>
-        {readingStatus.map((status) => (
-          <SelectItem key={status} value={status}>
-            {status}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+    <>
+      <Select onValueChange={handleStatusChange} value={currentReadingStatus}>
+        <SelectTrigger>
+          <SelectValue placeholder="Select status" />
+        </SelectTrigger>
+        <SelectContent>
+          {readingStatus.map((status) => (
+            <SelectItem key={status} value={status}>
+              {status}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </>
   );
 }

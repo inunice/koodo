@@ -14,9 +14,9 @@ import {
 import DisplayBadges from "./displayBadges";
 import UpdateBookmark from "./cardButtons/updateBookmark";
 import OpenWorkLink from "./cardButtons/openWorkLink";
-import SelectReadingStatus from "./cardButtons/selectReadingStatus";
 
 import { HeartFilled } from "@/assets/icon/heart";
+import ReadingStatus from "./cardButtons/reading-status";
 
 interface BookmarkCardProps {
   bookmark: Bookmark;
@@ -58,7 +58,7 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
             </p>
           </CardContent>
           <CardFooter className="w-full flex flex-row p-0 pt-2 gap-10 justify-between">
-            <SelectReadingStatus bookmark={bookmark} />
+            <ReadingStatus bookmark={bookmark} />
             <div className="flex flex-row text-xs leading-3 gap-3">
               <span>
                 {bookmark.workDetails?.workStats.words?.toLocaleString()} words
