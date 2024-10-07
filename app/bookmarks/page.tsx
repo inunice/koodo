@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useBookmarks } from "@/context/bookmarkContext";
+import { useBookmarks } from "@/context/bookmark-context";
 import { Bookmark } from "@/types/bookmarkInfo";
 
 import {
@@ -20,7 +20,7 @@ import BookmarkCard from "./bookmark-card";
 const ITEMS_PER_PAGE = 10;
 
 export default function BookmarksPage() {
-  const { bookmarks } = useBookmarks();
+  const { bookmarks, isLoading } = useBookmarks();
   const [query, setQuery] = useState("");
   const [filteredBookmarks, setFilteredBookmarks] = useState<Bookmark[]>([]);
 
@@ -57,9 +57,15 @@ export default function BookmarksPage() {
         setFilteredBookmarks={setFilteredBookmarks}
       />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 px-3">
-        {paginatedBookmarks.map((bookmark, index) => (
-          <BookmarkCard key={index} bookmark={bookmark} />
-        ))}
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : filteredBookmarks.length > 0 ? (
+          paginatedBookmarks.map((bookmark, index) => (
+            <BookmarkCard key={index} bookmark={bookmark} />
+          ))
+        ) : (
+          <p>No results found</p>
+        )}
       </div>
       {totalPages > 1 && (
         <Pagination>

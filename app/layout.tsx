@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import Link from "next/link";
 
-import { BookmarksProvider } from "@/context/bookmarkContext";
+import { BookmarksProvider } from "@/context/bookmark-context";
 
 import { Toaster } from "@/components/ui/toaster";
 import { Button } from "@/components/ui/button";

@@ -11,15 +11,9 @@ export default function useDeleteBookmarkFromDB() {
     try {
       await localDatabase.userBookmarks.delete(bookmarkID);
       setIsDeleting(false);
-      return { status: "success" };
     } catch (error) {
       console.error("Failed to delete bookmark:", error);
-
-      const message =
-        error instanceof Error ? error.message : "Unknown error occurred";
       setIsDeleting(false);
-
-      return { status: "error", message };
     }
   };
 

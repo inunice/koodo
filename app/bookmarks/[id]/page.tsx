@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useBookmarks } from "@/context/bookmarkContext";
+import { useBookmarks } from "@/context/bookmark-context";
 
 import { Bookmark } from "@/types/bookmarkInfo";
 

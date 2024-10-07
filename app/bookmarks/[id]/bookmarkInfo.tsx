@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 
 import { useSaveUserBookmark } from "@/hooks/useSaveUserBookmark";
-import { useBookmarks } from "@/context/bookmarkContext";
+import { useBookmarks } from "@/context/bookmark-context";
 
 import { Bookmark, BookmarkForm } from "@/types/bookmarkInfo";
 

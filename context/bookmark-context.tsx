@@ -5,7 +5,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { fetchBookmarkData } from "@/app/api/fetchBookmarkData";
 import { fetchWorks } from "@/app/api/fetchWorks";
 
-import useDeleteBookmarkFromDB from "@/hooks/useDeleteBookmarkFromDB";
+import useDeleteBookmarkFromDB from "@/hooks/use-delete-bookmark-from-db";
 
 import { Bookmark, UserBookmark } from "@/types/bookmarkInfo";
 import { WorkDetails } from "@/types/workInfo";
@@ -13,9 +13,10 @@ import { WorkDetails } from "@/types/workInfo";
 interface BookmarksContextProps {
   bookmarks: Bookmark[];
   setBookmarks: React.Dispatch<React.SetStateAction<Bookmark[]>>;
-  deleteBookmark: (bookmarkId: number) => Promise<boolean>;
+  isLoading: boolean;
+  deleteBookmark: (bookmarkId: number) => void;
   isDeleting: boolean;
-  updateBookmark: (updatedBookmark: Bookmark) => boolean;
+  updateBookmark: (updatedBookmark: Bookmark) => void;
   getBookmarkByID: (bookmarkID: number) => Bookmark | undefined;
 }
 
@@ -26,12 +27,12 @@ const BookmarksContext = createContext<BookmarksContextProps | undefined>(
 export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const { deleteBookmarkFromDB, isDeleting } = useDeleteBookmarkFromDB();
-
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchBookmarks = async () => {
+      setIsLoading(true);
       try {
         const userBookmarkData = await fetchBookmarkData();
         const userBookmarkWorkIDs = getWorkIDs(userBookmarkData);
@@ -43,6 +44,8 @@ export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({
         setBookmarks(bookmarks);
       } catch (error) {
         console.error("Failed to fetch bookmarks:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -71,26 +74,31 @@ export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({
     );
   };
 
+  const { deleteBookmarkFromDB, isDeleting } = useDeleteBookmarkFromDB();
+
   const deleteBookmark = async (bookmarkId: number) => {
-    const { status, message } = await deleteBookmarkFromDB(bookmarkId);
-    if (status === "success") {
+    try {
+      await deleteBookmarkFromDB(bookmarkId);
       setBookmarks((prevBookmarks) =>
         prevBookmarks.filter((bookmark) => bookmark.workID !== bookmarkId)
       );
-      return true;
-    } else {
-      console.error("Failed to delete bookmark:", message);
-      return false;
+    } catch (error) {
+      console.error("Failed to delete bookmark:", error);
     }
   };
 
   const updateBookmark = (updatedBookmark: Bookmark) => {
-    setBookmarks((prevBookmarks) =>
-      prevBookmarks.map((bookmark) =>
-        bookmark.workID === updatedBookmark.workID ? updatedBookmark : bookmark
-      )
-    );
-    return true;
+    try {
+      setBookmarks((prevBookmarks) =>
+        prevBookmarks.map((bookmark) =>
+          bookmark.workID === updatedBookmark.workID
+            ? updatedBookmark
+            : bookmark
+        )
+      );
+    } catch (error) {
+      console.error("Failed to update bookmark:", error);
+    }
   };
 
   const getBookmarkByID = (bookmarkId: number) => {
@@ -102,6 +110,7 @@ export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({
       value={{
         bookmarks,
         setBookmarks,
+        isLoading,
         deleteBookmark,
         isDeleting,
         updateBookmark,

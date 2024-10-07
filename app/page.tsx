@@ -1,6 +1,6 @@
 "use client";
 
-import { useBookmarks } from "@/context/bookmarkContext";
+import { useBookmarks } from "@/context/bookmark-context";
 import { Bookmark } from "@/types/bookmarkInfo";
 
 export default function Home() {

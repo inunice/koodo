@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-import { useBookmarks } from "@/context/bookmarkContext";
+import { useBookmarks } from "@/context/bookmark-context";
 import { updateChapterProgressStatus } from "../utils/update-chapter-progress-status";
 
 import { Bookmark } from "@/types/bookmarkInfo";

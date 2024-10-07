@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 
-import { useBookmarks } from "@/context/bookmarkContext";
+import { useBookmarks } from "@/context/bookmark-context";
 
 import DownloadCSV from "./downloadCSV";
 
