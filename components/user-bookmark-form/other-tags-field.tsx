@@ -36,7 +36,7 @@ export default function RatingField({ control }: OtherTagsFieldProps) {
             value={field.value}
             onChange={field.onChange}
             placeholder=""
-            className="max-w-[500px] z-10"
+            className="max-w-[500px] z-9"
             options={options}
           />
         </FormItem>

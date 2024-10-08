@@ -10,15 +10,15 @@ import { BookmarkForm } from "@/types/bookmark-types";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 
-import ChapterField from "@/components/userBookmarkForm/chapterField";
-import CommentField from "@/components/userBookmarkForm/commentField";
-import FavoriteField from "@/components/userBookmarkForm/favoriteField";
-import IsDownloadedField from "@/components/userBookmarkForm/isDownloadedField";
-import MainTagsField from "@/components/userBookmarkForm/mainTagsField";
-import OtherTagsField from "@/components/userBookmarkForm/otherTagsField";
-import RatingField from "@/components/userBookmarkForm/ratingField";
-import ReadingStatusField from "@/components/userBookmarkForm/readingStatusField";
-import ReadingDateField from "@/components/userBookmarkForm/readingDateField";
+import ChapterField from "@/components/user-bookmark-form/chapter-field";
+import CommentField from "@/components/user-bookmark-form/comment-field";
+import FavoriteField from "@/components/user-bookmark-form/favorite-field";
+import IsDownloadedField from "@/components/user-bookmark-form/is-downloaded-field";
+import MainTagsField from "@/components/user-bookmark-form/main-tags-field";
+import OtherTagsField from "@/components/user-bookmark-form/other-tags-field";
+import RatingField from "@/components/user-bookmark-form/rating-field";
+import ReadingStatusField from "@/components/user-bookmark-form/reading-status-field";
+import ReadingDateField from "@/components/user-bookmark-form/reading-date-field";
 
 interface EditBookmarkFormProps {
   latestChapter: number;
