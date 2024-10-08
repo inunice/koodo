@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { readingStatus } from "@/types/bookmark-types";
+
+import { readingStatus } from "@/utils/reading-status";
 
 export const formSchema = z.object({
   readingStatus: z.enum(readingStatus),

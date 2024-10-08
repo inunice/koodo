@@ -1,4 +1,8 @@
+import { useEffect, useState } from "react";
+
 import { Control } from "react-hook-form";
+
+import fetchTagsFromDB from "@/utils/fetch-tags-from-db";
 
 import { BookmarkForm } from "@/types/bookmark-types";
 
@@ -10,8 +14,16 @@ interface MainTagsFieldProps {
 }
 
 export default function RatingField({ control }: MainTagsFieldProps) {
-  // TODO: Fetch tags from DB
-  const options = ["tag", "tag2", "rag3", "best ship"];
+  const [options, setOptions] = useState<string[]>([]);
+
+  useEffect(() => {
+    async function fetchTags() {
+      const tags = await fetchTagsFromDB("mainTags");
+      setOptions(tags);
+    }
+
+    fetchTags();
+  }, []);
 
   return (
     <FormField
@@ -24,7 +36,7 @@ export default function RatingField({ control }: MainTagsFieldProps) {
             value={field.value}
             onChange={field.onChange}
             placeholder=""
-            className="max-w-[500px]"
+            className="max-w-[500px] z-10"
             options={options}
           />
         </FormItem>
