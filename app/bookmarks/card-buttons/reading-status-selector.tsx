@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useBookmarks } from "@/context/bookmark-context";
 import { updateBookmarkReadingStatusInDB } from "../utils/update-bookmark-reading-status-to-db";
@@ -32,6 +32,10 @@ export default function ReadingStatusSelector({
   const [currentReadingStatus, setCurrentReadingStatus] = useState(
     bookmark.readingStatus
   );
+
+  useEffect(() => {
+    setCurrentReadingStatus(bookmark.readingStatus);
+  }, [bookmark.readingStatus]);
 
   const handleStatusChange = (newReadingStatus: ReadingStatus) => {
     try {
