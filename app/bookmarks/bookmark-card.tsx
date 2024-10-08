@@ -11,7 +11,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 
-import DisplayBadges from "./display-badges";
+import DisplayBadges from "./components/display-badges";
 import BookmarkUpdater from "./card-buttons/bookmark-updater";
 import WorkLink from "./card-buttons/work-link";
 

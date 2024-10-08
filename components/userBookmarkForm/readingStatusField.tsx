@@ -1,6 +1,8 @@
 import { Control } from "react-hook-form";
 
-import { BookmarkForm, readingStatus } from "@/types/bookmark-types";
+import { BookmarkForm } from "@/types/bookmark-types";
+
+import { readingStatus } from "@/utils/reading-status";
 
 import {
   FormField,

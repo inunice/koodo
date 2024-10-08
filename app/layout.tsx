@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <BookmarksProvider>
       <html lang="en" className={`${dmSans.variable} font-sans lg:mx-[250px]`}>
-        <body>
+        <body className="mb-10">
           <NavigationBar />
           <main>{children}</main>
           <Toaster />
