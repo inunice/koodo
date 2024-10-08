@@ -1,7 +1,7 @@
 import { Bookmark } from "@/types/bookmark-types";
 
-import SelectReadingStatus from "./select-reading-status";
-import SelectChapterProgress from "./select-chapter-progress";
+import ReadingStatusSelector from "./reading-status-selector";
+import ChapterProgressSelector from "./chapter-progress-selector";
 
 interface ReadingStatus {
   bookmark: Bookmark;
@@ -10,9 +10,9 @@ interface ReadingStatus {
 export default function ReadingStatus({ bookmark }: ReadingStatus) {
   return (
     <div className="flex flex-row gap-1">
-      <SelectReadingStatus bookmark={bookmark} />
+      <ReadingStatusSelector bookmark={bookmark} />
       {bookmark.readingStatus === "Reading" && (
-        <SelectChapterProgress bookmark={bookmark} />
+        <ChapterProgressSelector bookmark={bookmark} />
       )}
     </div>
   );

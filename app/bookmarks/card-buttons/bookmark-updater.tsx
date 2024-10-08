@@ -1,10 +1,13 @@
 import { format } from "date-fns";
 
-import { useToast } from "@/hooks/use-toast";
 import useWorkInfo from "@/hooks/useWorkInfo";
 import { saveWork } from "@/app/api/saveWork";
 
 import { Bookmark } from "@/types/bookmark-types";
+
+import { useToast } from "@/hooks/use-toast";
+
+import { TOAST_MESSAGES_UPDATE_WORK } from "@/utils/toast-messages";
 
 import {
   Tooltip,
@@ -15,11 +18,11 @@ import {
 
 import { RecentlyViewedIcon } from "@/assets/icon/recentlyViewed";
 
-interface UpdateBookmarkProps {
+interface BookmarkUpdaterProps {
   bookmark: Bookmark;
 }
 
-export default function UpdateBookmark({ bookmark }: UpdateBookmarkProps) {
+export default function BookmarkUpdater({ bookmark }: BookmarkUpdaterProps) {
   const { toast } = useToast();
   const { getWorkInformation } = useWorkInfo();
 
@@ -37,13 +40,11 @@ export default function UpdateBookmark({ bookmark }: UpdateBookmarkProps) {
       bookmark.workDetails = workInfo;
       bookmark.workDetails.fetchDate = new Date();
 
-      toast({
-        title: result === "success" ? "Yay!" : "Uh oh! Something went wrong.",
-        description:
-          result === "success"
-            ? "Work information successfully updated!"
-            : "There was a problem with your request.",
-      });
+      if (result === "success") {
+        toast(TOAST_MESSAGES_UPDATE_WORK.SUCCESS);
+      } else {
+        toast(TOAST_MESSAGES_UPDATE_WORK.ERROR);
+      }
     }
   };
 

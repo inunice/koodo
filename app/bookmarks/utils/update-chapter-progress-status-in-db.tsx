@@ -1,25 +1,23 @@
 import { localDatabase } from "@/config/localDatabase";
-import { ReadingStatus } from "@/types/bookmark-types";
 
-export async function updateBookmarkReadingStatus(
+export async function updateChapterProgressStatusInDB(
   workID: number,
-  readingStatus: ReadingStatus
-): Promise<boolean> {
+  currentChapter: number
+): Promise<void> {
   try {
     const bookmark = await localDatabase.userBookmarks.get(workID);
 
     if (!bookmark) {
       console.error("Bookmark not found");
-      return false;
+      return;
     }
 
-    bookmark.readingStatus = readingStatus;
+    bookmark.currentChapter = currentChapter;
+    bookmark.updateDate = new Date();
     await localDatabase.userBookmarks.put(bookmark);
 
-    console.log("Reading status updated successfully");
-    return true;
+    console.log("Chapter progress updated successfully");
   } catch (error) {
     console.error("Failed to update user bookmark:", error);
-    return false;
   }
 }

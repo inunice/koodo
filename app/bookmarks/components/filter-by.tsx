@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 
 import { Bookmark } from "@/types/bookmark-types";
-import { readingStatus } from "@/types/bookmark-types";
+import { readingStatus } from "@/utils/reading-status";
 
 import {
   Select,

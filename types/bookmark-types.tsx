@@ -1,11 +1,6 @@
 import { WorkInfo, WorkBasicInfo } from "./work-types";
+import { readingStatus } from "@/utils/reading-status";
 
-export const readingStatus = [
-  "To Read",
-  "Reading",
-  "Dropped",
-  "Completed",
-] as const;
 export type ReadingStatus = (typeof readingStatus)[number];
 
 export interface BookmarkForm {

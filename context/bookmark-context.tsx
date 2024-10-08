@@ -89,6 +89,7 @@ export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const updateBookmark = (updatedBookmark: Bookmark) => {
     try {
+      updatedBookmark.updateDate = new Date();
       setBookmarks((prevBookmarks) =>
         prevBookmarks.map((bookmark) =>
           bookmark.workID === updatedBookmark.workID

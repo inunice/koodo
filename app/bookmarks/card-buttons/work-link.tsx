@@ -9,11 +9,11 @@ import {
 
 import { LinkIcon } from "@/assets/icon/link";
 
-interface OpenWorkLinkProps {
+interface WorkLinkProps {
   workID: number;
 }
 
-export default function OpenWorkLink({ workID }: OpenWorkLinkProps) {
+export default function WorkLink({ workID }: WorkLinkProps) {
   const handleClick = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {

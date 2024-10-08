@@ -12,11 +12,11 @@ import {
 } from "@/components/ui/card";
 
 import DisplayBadges from "./display-badges";
-import UpdateBookmark from "./card-buttons/update-bookmark";
-import OpenWorkLink from "./card-buttons/open-work-link";
+import BookmarkUpdater from "./card-buttons/bookmark-updater";
+import WorkLink from "./card-buttons/work-link";
 
 import { HeartFilled } from "@/assets/icon/heart";
-import ReadingStatus from "./card-buttons/reading-status";
+import StatusSelector from "./card-buttons/status-selector";
 
 interface BookmarkCardProps {
   bookmark: Bookmark;
@@ -58,7 +58,7 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
             </p>
           </CardContent>
           <CardFooter className="w-full flex flex-row p-0 pt-2 gap-10 justify-between">
-            <ReadingStatus bookmark={bookmark} />
+            <StatusSelector bookmark={bookmark} />
             <div className="flex flex-row text-xs leading-3 gap-3">
               <span>
                 {bookmark.workDetails?.workStats.words?.toLocaleString()} words
@@ -66,8 +66,8 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
               <span>{bookmark.rating}/5 stars</span>
             </div>
             <div className="flex flex-row gap-1 h-6">
-              <UpdateBookmark bookmark={bookmark} />
-              <OpenWorkLink workID={bookmark.workID} />
+              <BookmarkUpdater bookmark={bookmark} />
+              <WorkLink workID={bookmark.workID} />
             </div>
           </CardFooter>
         </Card>
