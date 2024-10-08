@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 
 import { formSchema } from "@/lib/formSchema";
 
-import { BookmarkForm } from "@/types/bookmarkInfo";
+import { BookmarkForm } from "@/types/bookmark-types";
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";

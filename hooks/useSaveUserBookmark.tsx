@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { localDatabase } from "@/config/localDatabase";
-import { UserBookmark, BookmarkForm } from "@/types/bookmarkInfo";
-import { WorkBasicInfo } from "@/types/workInfo";
+import { UserBookmark, BookmarkForm } from "@/types/bookmark-types";
+import { WorkBasicInfo } from "@/types/work-types";
 
 interface SaveUserBookmarkProps {
   userID: number;

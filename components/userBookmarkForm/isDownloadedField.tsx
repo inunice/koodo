@@ -6,7 +6,7 @@ import {
   FormLabel,
   FormControl,
 } from "@/components/ui/form";
-import { BookmarkForm } from "@/types/bookmarkInfo";
+import { BookmarkForm } from "@/types/bookmark-types";
 
 interface IsDownloadedFieldProps {
   control: Control<BookmarkForm>;

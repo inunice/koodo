@@ -1,5 +1,5 @@
 import supabase from "@/config/supabaseClient";
-import { WorkInfo, WorkDetails } from "@/types/workInfo";
+import { WorkInfo, WorkDetails } from "@/types/work-types";
 
 export const fetchWorks = async (
   workIDs: number[],

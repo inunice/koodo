@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { saveWork } from "@/app/api/saveWork";
 import { useSaveUserBookmark } from "@/hooks/useSaveUserBookmark";
-import { WorkInfo } from "@/types/workInfo";
-import { BookmarkForm } from "@/types/bookmarkInfo";
+import { WorkInfo } from "@/types/work-types";
+import { BookmarkForm } from "@/types/bookmark-types";
 
 import WorkCard from "./workCard";
 import WorkPreview from "./workPreview";

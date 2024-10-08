@@ -1,4 +1,4 @@
-import { Bookmark } from "@/types/bookmarkInfo";
+import { Bookmark } from "@/types/bookmark-types";
 
 import SelectReadingStatus from "./select-reading-status";
 import SelectChapterProgress from "./select-chapter-progress";

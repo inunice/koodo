@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { WorkInfo } from "@/types/workInfo";
+import { WorkInfo } from "@/types/work-types";
 
 const cheerio = require("cheerio");
 

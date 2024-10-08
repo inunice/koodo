@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { Bookmark } from "@/types/bookmarkInfo";
+import { Bookmark } from "@/types/bookmark-types";
 import { FilterType, FilterTypeDisplayNames } from "../types/filter-type";
 
 import { Command, CommandInput, CommandList } from "@/components/ui/command";

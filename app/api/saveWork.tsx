@@ -1,5 +1,5 @@
 import supabase from "@/config/supabaseClient";
-import { WorkInfo } from "@/types/workInfo";
+import { WorkInfo } from "@/types/work-types";
 
 export const saveWork = async (work: WorkInfo): Promise<string> => {
   const workData = {

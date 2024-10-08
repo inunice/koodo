@@ -1,6 +1,6 @@
 import Papa from "papaparse";
 
-import { Bookmark, BookmarkCSV } from "@/types/bookmarkInfo";
+import { Bookmark, BookmarkCSV } from "@/types/bookmark-types";
 
 import { Button } from "@/components/ui/button";
 

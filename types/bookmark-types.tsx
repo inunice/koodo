@@ -1,4 +1,4 @@
-import { WorkInfo, WorkBasicInfo } from "./workInfo";
+import { WorkInfo, WorkBasicInfo } from "./work-types";
 
 export const readingStatus = [
   "To Read",

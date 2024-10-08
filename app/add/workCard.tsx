@@ -1,6 +1,6 @@
 "use client";
 
-import { WorkInfo } from "@/types/workInfo";
+import { WorkInfo } from "@/types/work-types";
 import { Card } from "@/components/ui/card";
 
 interface WorkCardProps {

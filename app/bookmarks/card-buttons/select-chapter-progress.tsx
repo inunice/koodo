@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useBookmarks } from "@/context/bookmark-context";
 import { updateChapterProgressStatus } from "../utils/update-chapter-progress-status";
 
-import { Bookmark } from "@/types/bookmarkInfo";
+import { Bookmark } from "@/types/bookmark-types";
 
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -15,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
 import { TOAST_MESSAGE_UPDATE } from "@/utils/toast-messages";
 
 interface SelectChapterProgressProps {
@@ -31,17 +32,18 @@ export default function SelectChapterProgress({
   );
 
   const handleChapterChange = (updatedChapter: string) => {
-    const updatedBookmark = {
-      ...bookmark,
-      currentChapter: Number(updatedChapter),
-    };
-    setCurrentChapter(updatedChapter);
-    updateChapterProgressStatus(bookmark.workID, Number(updatedChapter));
+    try {
+      const updatedBookmark = {
+        ...bookmark,
+        currentChapter: Number(updatedChapter),
+      };
+      setCurrentChapter(updatedChapter);
+      updateChapterProgressStatus(bookmark.workID, Number(updatedChapter));
 
-    const status = updateBookmark(updatedBookmark);
-    if (status) {
+      updateBookmark(updatedBookmark);
       toast(TOAST_MESSAGE_UPDATE.SUCCESS);
-    } else {
+    } catch (error) {
+      console.error("Failed to update chapter progress:", error);
       toast(TOAST_MESSAGE_UPDATE.ERROR);
     }
   };

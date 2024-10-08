@@ -4,7 +4,7 @@ import { Calendar as CalendarIcon } from "lucide-react";
 import { DateRange } from "react-day-picker";
 import { useState, useEffect } from "react";
 
-import { BookmarkForm } from "@/types/bookmarkInfo";
+import { BookmarkForm } from "@/types/bookmark-types";
 import { FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";

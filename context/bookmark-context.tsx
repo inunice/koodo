@@ -7,8 +7,8 @@ import { fetchWorks } from "@/app/api/fetchWorks";
 
 import useDeleteBookmarkFromDB from "@/hooks/use-delete-bookmark-from-db";
 
-import { Bookmark, UserBookmark } from "@/types/bookmarkInfo";
-import { WorkDetails } from "@/types/workInfo";
+import { Bookmark, UserBookmark } from "@/types/bookmark-types";
+import { WorkDetails } from "@/types/work-types";
 
 interface BookmarksContextProps {
   bookmarks: Bookmark[];

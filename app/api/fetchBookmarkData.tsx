@@ -1,5 +1,5 @@
 import { localDatabase } from "@/config/localDatabase";
-import { UserBookmark } from "@/types/bookmarkInfo";
+import { UserBookmark } from "@/types/bookmark-types";
 
 export async function fetchBookmarkData(): Promise<UserBookmark[]> {
   try {

@@ -1,5 +1,5 @@
 import { Dexie, type EntityTable } from "dexie";
-import { UserBookmark } from "@/types/bookmarkInfo";
+import { UserBookmark } from "@/types/bookmark-types";
 
 export const DATABASE_NAME = "Koodo";
 export const USER_BOOKMARKS_TABLE = "userBookmarks";

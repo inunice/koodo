@@ -1,5 +1,5 @@
 import { localDatabase } from "@/config/localDatabase";
-import { ReadingStatus } from "@/types/bookmarkInfo";
+import { ReadingStatus } from "@/types/bookmark-types";
 
 export async function updateBookmarkReadingStatus(
   workID: number,

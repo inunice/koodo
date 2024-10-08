@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useBookmarks } from "@/context/bookmark-context";
-import { Bookmark } from "@/types/bookmarkInfo";
+import { Bookmark } from "@/types/bookmark-types";
 
 import {
   Pagination,

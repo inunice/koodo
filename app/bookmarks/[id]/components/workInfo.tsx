@@ -1,4 +1,4 @@
-import { Bookmark } from "@/types/bookmarkInfo";
+import { Bookmark } from "@/types/bookmark-types";
 
 interface WorkInfoProps {
   bookmark: Bookmark;

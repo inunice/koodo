@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import useWorkInfo from "@/hooks/useWorkInfo";
 
-import { WorkInfo } from "@/types/workInfo";
+import { WorkInfo } from "@/types/work-types";
 
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";

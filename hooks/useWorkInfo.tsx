@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { WorkInfo } from "@/types/workInfo";
+import { WorkInfo } from "@/types/work-types";
 
 export default function useWorkInfo() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);

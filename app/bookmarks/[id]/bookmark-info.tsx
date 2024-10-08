@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { useSaveUserBookmark } from "@/hooks/useSaveUserBookmark";
 import { useBookmarks } from "@/context/bookmark-context";
 
-import { Bookmark, BookmarkForm } from "@/types/bookmarkInfo";
+import { Bookmark, BookmarkForm } from "@/types/bookmark-types";
 
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";

@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-import { Bookmark } from "@/types/bookmarkInfo";
+import { Bookmark } from "@/types/bookmark-types";
 
 import {
   Card,

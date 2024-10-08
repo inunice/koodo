@@ -4,7 +4,7 @@ import { useToast } from "@/hooks/use-toast";
 import useWorkInfo from "@/hooks/useWorkInfo";
 import { saveWork } from "@/app/api/saveWork";
 
-import { Bookmark } from "@/types/bookmarkInfo";
+import { Bookmark } from "@/types/bookmark-types";
 
 import {
   Tooltip,
