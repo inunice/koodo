@@ -43,7 +43,7 @@ export default function DownloadCSV({ bookmarks }: BookmarkProps) {
     const a = document.createElement("a");
 
     a.href = url;
-    a.download = "backup_data.csv";
+    a.download = "koodo-bookmarks.csv";
     a.click();
 
     URL.revokeObjectURL(url);

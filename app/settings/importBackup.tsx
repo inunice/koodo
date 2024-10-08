@@ -14,6 +14,7 @@ import {
   FormControl,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -25,7 +26,7 @@ import {
 } from "@/config/localDatabase";
 
 const fileSchema = z.object({
-  formatName: z.string(),
+  formatName: z.literal("dexie"),
   formatVersion: z.number(),
   data: z.object({
     databaseName: z.literal(DATABASE_NAME),
@@ -107,7 +108,7 @@ export default function ImportBackup() {
       if (success) {
         toast({
           title: "Yay!",
-          description: "Import successful!",
+          description: "Your import was successful!",
         });
       } else {
         toast({
@@ -140,11 +141,7 @@ export default function ImportBackup() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input
-                  type="file"
-                  placeholder="Select backup file"
-                  onChange={handleFileChange}
-                />
+                <Input type="file" onChange={handleFileChange} />
               </FormControl>
               <FormMessage />
             </FormItem>

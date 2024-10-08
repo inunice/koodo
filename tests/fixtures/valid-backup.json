@@ -1,0 +1,62 @@
+{
+    "formatName": "dexie",
+    "formatVersion": 1,
+    "data": {
+      "databaseName": "Koodo",
+      "databaseVersion": 1,
+      "tables": [
+        {
+          "name": "userBookmarks",
+          "schema": "workID,userID,readingStatus,currentChapter,fandoms,mainTags,otherTags,isDownloaded,favorite,rating,comment,workBasicInfo,startDateReading,endDateReading",
+          "rowCount": 1
+        }
+      ],
+      "data": [
+        {
+          "tableName": "userBookmarks",
+          "inbound": true,
+          "rows": [
+            {
+              "userID": 1,
+              "workID": 12345,
+              "workBasicInfo": {
+                "title": "Test",
+                "author": [
+                  "tester"
+                ],
+                "summary": [
+                  "I am testing."
+                ],
+                "fandoms": [
+                  "Flowers for a Tester"
+                ]
+              },
+              "readingStatus": "Reading",
+              "currentChapter": 0,
+              "mainTags": [
+                "testTag"
+              ],
+              "otherTags": [],
+              "isDownloaded": false,
+              "favorite": false,
+              "rating": 0,
+              "comment": "",
+              "addDate": 1728358667186,
+              "updateDate": 1728358819499,
+              "startDateReading": null,
+              "endDateReading": null,
+              "$types": {
+                "workBasicInfo.author": "arrayNonindexKeys",
+                "workBasicInfo.summary": "arrayNonindexKeys",
+                "workBasicInfo.fandoms": "arrayNonindexKeys",
+                "mainTags": "arrayNonindexKeys",
+                "otherTags": "arrayNonindexKeys",
+                "addDate": "date",
+                "updateDate": "date"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
