@@ -1,4 +1,5 @@
 import { Bookmark } from "@/types/bookmark-types";
+import BookmarksByTagsCard from "./bookmarks-by-tags-card";
 
 interface BookmarksByTagsProps {
   bookmarks: Bookmark[];
@@ -24,13 +25,11 @@ export default function BookmarksByTags({ bookmarks }: BookmarksByTagsProps) {
       {Object.keys(bookmarksByTags).map((tag) => (
         <div key={tag} className="mb-5">
           <h3 className="font-bold">{tag}</h3>
-          <ul>
+          <div className="flex flex-wrap gap-2">
             {bookmarksByTags[tag].map((bookmark) => (
-              <li key={bookmark.workID}>
-                {bookmark.workBasicInfo.title} - {bookmark.readingStatus}
-              </li>
+              <BookmarksByTagsCard key={bookmark.workID} bookmark={bookmark} />
             ))}
-          </ul>
+          </div>
         </div>
       ))}
     </div>
