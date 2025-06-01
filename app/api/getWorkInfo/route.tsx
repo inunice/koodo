@@ -56,7 +56,9 @@ export async function GET(req: NextRequest) {
       language: $("dd.language").text().trim(),
     };
 
-    const publishedDate = new Date($("dd.stats dl.stats dd.published").text());
+    const publishedDateText = $("dd.stats dl.stats dd.published").text().trim();
+    const publishedDate = new Date(Date.parse(publishedDateText));
+
     const lastestUpdateDate = $("dd.stats dl.stats dd.status").text();
     const chapterProgress = $("dd.stats dl.stats dd.chapters")
       .text()
