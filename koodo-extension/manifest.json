@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Koodo AO3 Extractor",
+  "version": "1.0",
+  "description": "Scrapes AO3 work info and sends it to Koodo.",
+  "permissions": [],
+  "host_permissions": ["https://archiveofourown.org/works/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://archiveofourown.org/works/*"],
+      "js": ["content-script.js"]
+    }
+  ],
+  "action": {
+    "default_title": "Koodo AO3 Extractor"
+  }
+}

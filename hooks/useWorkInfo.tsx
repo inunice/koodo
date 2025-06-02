@@ -16,18 +16,68 @@ export default function useWorkInfo() {
       }
 
       const url = new URL(link);
-      const id = url.pathname.split("/")[2];
 
-      const response = await fetch(
-        `/api/getWorkInfo?id=${encodeURIComponent(id)}`,
-        {
-          method: "GET",
-        }
-      );
+      // Open work in new tab
+      window.open(link, "_blank", "width=800,height=600");
 
-      const work = await response.json();
+      // Promise that resolves when AO3 data is sent from the new tab
+      const result = await new Promise<any>((resolve, reject) => {
+        const timeout = setTimeout(() => {
+          reject(new Error("Timeout waiting for AO3 data"));
+        }, 20000); // 20s timeout
+
+        const listener = (event: MessageEvent) => {
+          if (
+    
+            event.data?.ao3Extract
+          ) {
+            clearTimeout(timeout);
+            window.removeEventListener("message", listener);
+            resolve(event.data.ao3Extract);
+            console.log("AO3 data received:", event.data.ao3Extract);
+          }
+        };
+
+        window.addEventListener("message", listener);
+      });
+
       setErrorMessage(null);
-      return work;
+
+      const formatted: WorkInfo = {
+        workID: Number(url.pathname.split("/")[2]),
+        workLink: link,
+        fetchDate: new Date(),
+        workBasicInfo: {
+          title: result.title || "",
+          author: result.author || [],
+          summary: result.summary || [],
+          fandoms: result.fandoms || [],
+        },
+        workTags: {
+          rating: result.rating || "",
+          archiveWarnings: result.archiveWarnings || [],
+          categories: result.categories || [],
+          relationships: result.relationships || [],
+          characters: result.characters || [],
+          additionalTags: result.additionalTags || [],
+          language: result.language || "",
+        },
+        workStats: {
+          publishedDate: result.publishedDate ? new Date(result.publishedDate) : new Date(),
+          lastestUpdateDate: result.updatedDate ? new Date(result.updatedDate) : new Date(),
+          words: result.words || 0,
+          latestChapter: result.latestChapter || 0,
+          totalChapters: result.totalChapters || 0,
+          comments: result.comments || 0,
+          kudos: result.kudos || 0,
+          bookmarks: result.bookmarks || 0,
+          hits: result.hits || 0,
+          status: result.status || "In Progress",
+          workType: result.workType || "Multi Chapter",
+        }
+      };
+
+      return formatted;
     } catch (error) {
       console.error("Error fetching data:", error);
 
