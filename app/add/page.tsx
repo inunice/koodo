@@ -60,6 +60,10 @@ export default function Home() {
   return (
     <div>
       <h1>Enter Fic URL</h1>
+      <p>
+        Ensure you have the browser extension installed locally using developer mode.
+        The extension can be downloaded <a href="https://github.com/inunice/koodo/tree/main/koodo-extension" className="underline" target="_blank" rel="noopener noreferrer">here</a>.
+      </p>
       <WorkPreview setWorkInfo={getWorkInformation} />
       {work && <WorkCard work={work} />}
       {work && (

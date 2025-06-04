@@ -9,6 +9,8 @@ import Link from "next/link";
 
 export default function NavigationBar() {
   return (
+    <>
+          <p>UI still under construction! Thank you for understanding!</p>
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
@@ -28,5 +30,6 @@ export default function NavigationBar() {
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
+     </>
   );
 }
